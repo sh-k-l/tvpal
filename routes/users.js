@@ -28,6 +28,14 @@ router.get('/:username', async (req, res) => {
   res.json(user.getPublic());
 });
 
+// @route   GET /users/search?q=
+// @desc    Search users
+// @access  Public
+router.get('/search', async (req, res) => {
+  if (!req.query.q) return res.status(200).json([]);
+  //TODO
+});
+
 // @route   PATCH /users/addusername
 // @desc    Add username to user
 // @access  Private
@@ -54,7 +62,7 @@ router.patch(
     }
 
     req.user.username = username;
-    req.user.save();
+    await req.user.save();
 
     res.status(200).json({ status: 'ok' });
   }

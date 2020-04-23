@@ -28,7 +28,7 @@ UserSchema.methods.getPublic = function getPublic() {
 
   return {
     name: this.name,
-    shows: this.shows,
+    shows: shows,
     username: this.username,
   };
 };

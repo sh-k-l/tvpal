@@ -13,7 +13,9 @@ router.post('/', auth, async (req, res) => {
       const index = req.user.shows.findIndex((s) => s._id === show.id);
 
       if (index !== -1) {
-        return res.status(422).json({ msg: 'Duplicate show. Shows must not already be in list.' });
+        return res
+          .status(422)
+          .json({ msg: `Duplicate show (${show.id}). Shows must not already be in list.` });
       }
 
       req.user.shows.push({
@@ -26,7 +28,7 @@ router.post('/', auth, async (req, res) => {
     await req.user.save();
     res.status(200).json({ msg: 'OK' });
   } catch (error) {
-    return res.status(422).json({ msg: 'Invalid shows. Shows require an id and name' });
+    return res.status(400).json({ msg: 'Invalid shows. Shows require an id and name' });
   }
 });
 
@@ -39,12 +41,36 @@ router.delete('/:id', auth, async (req, res) => {
     return res.status(404).json({ msg: 'Show not found' });
   }
   req.user.shows.splice(index, 1);
-  req.user.save();
+  await req.user.save();
   res.status(200).json({ msg: 'OK' });
 });
 
 // @route   PATCH /shows
-// @desc    Reorder list of shows
+// @desc    Reorder list of shows. Expects an array of show ids for new order.
 // @access  Private
+router.patch('/', auth, async (req, res) => {
+  const { order } = req.body;
+  if (order.length !== req.user.shows.length) {
+    return res.status(422).json({
+      msg: `Order array (${order.length}) must have same length as show array (${req.user.shows.length})`,
+    });
+  }
+
+  // Is there a better way to handle reordering this list?
+  const reordered = [];
+  for (let id of order) {
+    const index = req.user.shows.findIndex((s) => s._id === id);
+    if (index === -1) {
+      return res
+        .status(422)
+        .json({ msg: `Order array contains show ID (${id}) that does not exist in show array` });
+    }
+    reordered.push(req.user.shows[index]);
+  }
+
+  req.user.shows = reordered;
+  await req.user.save();
+  res.status(200).json({ msg: 'OK' });
+});
 
 module.exports = router;

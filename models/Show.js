@@ -24,7 +24,7 @@ const ShowSchema = new Schema({
 
 ShowSchema.methods.getPublic = function getPublic() {
   return {
-    _id: this._id,
+    id: this._id,
     name: this.name,
     imdb: this.imdb,
     image: this.image,
