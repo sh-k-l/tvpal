@@ -15,13 +15,7 @@ router.get('/google/callback', passport.authenticate('google'), (req, res) => {
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1w' });
 
-  res.json({
-    token,
-    name: req.user.name,
-    email: req.user.email,
-    shows: req.user.shows,
-    username: req.user.username,
-  });
+  res.redirect(`http://localhost:3000/auth?token=${token}`);
 });
 
 module.exports = router;
