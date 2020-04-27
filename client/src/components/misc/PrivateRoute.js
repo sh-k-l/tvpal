@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
-  <Route {...rest} render={(props) => (!authenticated ? <Redirect to="/" /> : <Component {...props} />)} />
+  <Route
+    {...rest}
+    render={(props) => (!authenticated ? <Redirect to="/" /> : <Component {...props} />)}
+  />
 );
 
 PrivateRoute.propTypes = {
@@ -12,9 +15,7 @@ PrivateRoute.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authenticated = state.user !== null
-})
+  authenticated: state.user !== null,
+});
 
 export default connect(mapStateToProps)(PrivateRoute);
-
-

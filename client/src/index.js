@@ -8,7 +8,7 @@ import middleware from './middleware';
 
 import App from './components/App';
 
-import './index.css';
+import './sass/main.scss';
 
 const store = createStore(reducer, middleware);
 

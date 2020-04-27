@@ -1,0 +1,27 @@
+.welcome{
+  @include main-gradient;
+  color: $white;
+
+  a {
+    text-decoration: none;
+  }
+
+  .info{
+    font-style: italic;
+    text-decoration: underline;
+    color: $white;
+    font-weight: lighter;
+    margin: 1rem;
+
+    &:hover{
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.details{
+  ul{
+    list-style: circle;
+  }
+}
