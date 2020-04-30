@@ -7,6 +7,7 @@ const Welcome = () => {
   return (
     <>
       <div className="fill-and-center welcome">
+        <h4>📺</h4>
         <h1>TV Pal</h1>
         <GoogleButton />
         <Link

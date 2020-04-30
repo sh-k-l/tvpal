@@ -8,6 +8,7 @@ const router = new Router();
 // @access  Private
 router.post('/', auth, async (req, res) => {
   const { shows } = req.body;
+
   try {
     for (let show of shows) {
       const index = req.user.shows.findIndex((s) => s._id === show.id);

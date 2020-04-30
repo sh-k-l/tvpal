@@ -1,6 +1,6 @@
 .welcome{
-  @include main-gradient;
-  color: $white;
+  @include dark-gradient;
+  color: $grey-1;
 
   a {
     text-decoration: none;
@@ -9,7 +9,6 @@
   .info{
     font-style: italic;
     text-decoration: underline;
-    color: $white;
     font-weight: lighter;
     margin: 1rem;
 

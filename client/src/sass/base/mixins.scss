@@ -1,5 +1,15 @@
-@mixin main-gradient {
+@mixin dark-gradient {
   background: #0F2027;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(to right, $blue-2, $blue-3, $blue-4);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, $blue-2, $blue-3, $blue-4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+@mixin light-gradient {
+  background: #0F2027;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(135deg,$blue-1 0%,$blue-3 100%);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(135deg,$blue-1 0%,$blue-3 100%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+@mixin box-shadow {
+  box-shadow: 0.25rem 0.25rem 0.6rem rgba(0,0,0,0.05), 0 0.5rem 1.125rem rgba(75,0,0,0.05);
 }
