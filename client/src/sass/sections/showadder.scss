@@ -1,0 +1,35 @@
+.show-adder{
+
+  input{
+    width:100%;
+
+  }
+
+  li{
+    border-bottom: 1px solid $grey-2;    
+   
+
+    p{
+      cursor: pointer;
+      padding:5px;
+      display: inline-block;
+
+      &.added {
+        cursor: unset;
+        opacity:0.2;
+      }
+    }
+
+    
+
+    &:last-of-type{
+      border-bottom: unset;
+    }
+    
+  }
+
+
+
+
+
+}

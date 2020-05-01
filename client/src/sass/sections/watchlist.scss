@@ -11,7 +11,7 @@
   .column {
     counter-reset: gradient-counter;
     list-style: none;
-    margin: 1.75rem 0;
+    margin: 0.75rem 0;
     padding-left: 1rem;
     width:100%;
 
@@ -19,11 +19,9 @@
       display:flex;    
       align-items: center;
       justify-content: space-between;
-      background: white;
-      border-radius: 0 0.5rem 0.5rem 0.5rem;
-      @include box-shadow;
+      
       counter-increment: gradient-counter;
-      margin-top: 1rem;
+      
       min-height: 3rem;
       padding: 1rem 1rem 1rem 3rem;
       position: relative;
@@ -33,13 +31,19 @@
         color:inherit;
         text-decoration-color: rgba(17, 0, 255, 0.1);
         margin-right: 10px;
+
+        span{
+          opacity: 0.5;
+          margin-left:5px;
+        }
       }
 
       .handle {
-        max-height:22px;
-        min-height:22px;
-        max-width:22px;
-        min-width:22px;
+        $size: 22px;
+        max-height:$size;
+        min-height:$size;
+        max-width:$size;
+        min-width:$size;
         border-radius: 5px;
         background-color: $blue-1;        
       }     

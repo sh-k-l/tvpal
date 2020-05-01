@@ -6,7 +6,7 @@ const Show = ({ show, index }) => {
     <Draggable draggableId={show.id + ''} index={index}>
       {(provided, snapshot) => (
         <div
-          className="show"
+          className="content-box show"
           {...provided.draggableProps}
           ref={provided.innerRef}
           // isDragging={snapshot.isDragging}
@@ -17,6 +17,7 @@ const Show = ({ show, index }) => {
             rel="noopener noreferrer"
           >
             {show.name}
+            {show.country && <span>({show.country})</span>}
           </a>
           <div className="handle" {...provided.dragHandleProps} />
         </div>

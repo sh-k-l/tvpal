@@ -36,7 +36,6 @@ const Watchlist = ({ shows, reorderShows }) => {
 
   return (
     <div className="watchlist">
-      <h3>Watchlist</h3>
       <DragDropContext onDragEnd={onDragEnd}>
         {data.columnOrder.map((columnId) => {
           const column = data.columns[columnId];

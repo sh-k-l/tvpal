@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Menu = () => {
+const Menu = ({ toggleShowAdder }) => {
   return (
-    <div className="menu">
+    <div className="menu-container">
       <ul>
         <li>
           <NavLink to="/summary" activeClassName="selected">
@@ -31,6 +31,9 @@ const Menu = () => {
           </NavLink>
         </li>
       </ul>
+      <div className="toggle-show-adder" onClick={toggleShowAdder}>
+        <i className="fas fa-plus-square"></i>
+      </div>
     </div>
   );
 };

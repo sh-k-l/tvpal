@@ -30,6 +30,7 @@ UserSchema.methods.getPublic = function getPublic() {
     name: this.name,
     shows: shows,
     username: this.username,
+    email: this.email,
   };
 };
 

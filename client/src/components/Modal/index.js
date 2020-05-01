@@ -22,10 +22,12 @@ const Modal = ({ toggleVisibleModal, isOpen, direction, children }) => {
       // at which the modal will be expanded to full screen
       maxMediaWidth={1024}
       // allows you to decorate a className or overlayClassName
-      className={'string'}
+      className={`modal modal-${direction}`}
       overlayClassName={'string'}
     >
-      <button onClick={toggleVisibleModal}>{/* <img src={'/close.svg'} /> */}X</button>
+      <div className="close" onClick={toggleVisibleModal}>
+        <img alt="close modal" src={process.env.PUBLIC_URL + '/img/close.svg'} />
+      </div>
       {children}
     </RMSModal>
   );

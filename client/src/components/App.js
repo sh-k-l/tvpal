@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import setAuthToken from '../utils/setAuthToken';
-import { handleGetUser, handleLogout } from '../actions/user';
+import { handleGetUser } from '../actions/user';
 
 import TokenHandler from './misc/TokenHandler';
 import PrivateRoute from './misc/PrivateRoute';
@@ -26,9 +26,9 @@ if (window.localStorage.token) {
 //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYTAzMTExZDlmZjg2MzljY2E1Y2U4MCIsImlhdCI6MTU4NzU1NjYyNSwiZXhwIjoxNTg4MTYxNDI1fQ.hPHtahn_OqpPrkZCZG4gEvFrp9UHNqNGc9jzQbHf8dw  s'
 // );
 
-const App = ({ dispatch, authenticated }) => {
+const App = ({ getUser, authenticated }) => {
   useEffect(() => {
-    dispatch(handleGetUser());
+    getUser();
   }, []);
 
   const [showAdderModal, setShowAdderModal] = useState(false);
@@ -42,10 +42,7 @@ const App = ({ dispatch, authenticated }) => {
       <LoadingBar />
       <div className="App">
         <Router>
-          {authenticated ? <Menu /> : <Welcome />}
-          <a href="#" onClick={() => dispatch(handleLogout())}>
-            Logout
-          </a>
+          {authenticated ? <Menu toggleShowAdder={() => toggleShowAdder()} /> : <Welcome />}
 
           <Switch>
             <Route path="/auth" component={TokenHandler} />
@@ -56,8 +53,6 @@ const App = ({ dispatch, authenticated }) => {
             <PrivateRoute path="/settings" component={Settings} />
           </Switch>
         </Router>
-
-        <div onClick={() => toggleShowAdder()}>Add Show</div>
       </div>
       <ScrollUpButton />
       <ShowAddingModal isOpen={showAdderModal} toggleVisibleModal={() => toggleShowAdder()} />
@@ -65,6 +60,12 @@ const App = ({ dispatch, authenticated }) => {
   );
 };
 
-export default connect((state) => ({
+const mapDispatchToProps = (dispatch) => ({
+  getUser: () => dispatch(handleGetUser()),
+});
+
+const mapStateToProps = (state) => ({
   authenticated: state.user !== null,
-}))(App);
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

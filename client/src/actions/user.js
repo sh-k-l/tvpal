@@ -5,6 +5,7 @@ import setAuthToken from '../utils/setAuthToken';
 export const SET_SHOWS = 'SET_SHOWS';
 export const SET_USER = 'SET_USER';
 export const CLEAR_USER = 'CLEAR_USER';
+export const ADD_USERNAME = 'ADD_USERNAME';
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -24,6 +25,7 @@ export const handleGetUser = () => async (dispatch) => {
       setUser({
         username: user.username,
         name: user.name,
+        email: user.email,
       })
     );
     dispatch(setShows(user.shows));
@@ -32,6 +34,27 @@ export const handleGetUser = () => async (dispatch) => {
     dispatch(handleLogout());
   } finally {
     dispatch(hideLoading());
+  }
+};
+
+const addUsername = (username) => ({
+  type: ADD_USERNAME,
+  username,
+});
+
+export const handleAddUsername = (username) => async (dispatch) => {
+  console.log(username);
+  try {
+    const body = JSON.stringify({ username: username });
+    await axios.patch('/users/addusername', body, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    dispatch(addUsername(username));
+  } catch (error) {
+    console.log(error);
   }
 };
 

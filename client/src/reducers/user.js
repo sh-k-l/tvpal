@@ -1,4 +1,4 @@
-import { SET_USER, CLEAR_USER } from '../actions/user';
+import { SET_USER, CLEAR_USER, ADD_USERNAME } from '../actions/user';
 
 export default (state = null, action) => {
   switch (action.type) {
@@ -6,6 +6,11 @@ export default (state = null, action) => {
       return action.user;
     case CLEAR_USER:
       return null;
+    case ADD_USERNAME:
+      return {
+        ...state,
+        username: action.username,
+      };
     default:
       return state;
   }

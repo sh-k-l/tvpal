@@ -1,0 +1,26 @@
+.modal{ 
+  padding:2rem;
+  
+  .close{
+    margin: 0 auto;    
+    padding: 10px;
+    cursor: pointer;
+
+    img{
+      width:30px;
+      height: 30px;
+    }
+  }
+}
+
+.modal-right {
+  .close {
+    margin-left: 0;
+  }
+}
+
+.modal-left {
+  .close {    
+    margin-right: 0;
+  }
+}

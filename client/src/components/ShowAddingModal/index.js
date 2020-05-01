@@ -38,8 +38,16 @@ const ShowAddingModal = ({ toggleVisibleModal, isOpen }) => {
 
   return (
     <Modal toggleVisibleModal={toggleVisibleModal} isOpen={isOpen} direction={'right'}>
-      <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
-      <ShowList shows={shows} />
+      <div className="show-adder">
+        <h3>Add New Show</h3>
+        <input
+          type="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder={`e.g. "Breaking Bad"`}
+        />
+        <ShowList shows={shows} />
+      </div>
     </Modal>
   );
 };

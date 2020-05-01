@@ -1,0 +1,26 @@
+.settings {
+  max-width: 80vw;
+  margin:0 auto;
+  padding:1.5rem;
+
+  p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &>*{
+      margin:0.5rem 0.25rem;
+    }
+  }
+
+  .username-adder{
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    & > * {
+      margin-right: 5px;
+    }
+  }
+
+}

@@ -24,6 +24,7 @@ router.post('/', auth, async (req, res) => {
         name: show.name,
         imdb: show.imdb,
         image: show.image,
+        country: show.country,
       });
     }
     await req.user.save();

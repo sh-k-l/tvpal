@@ -1,0 +1,45 @@
+.menu-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top:0.25rem;
+
+  ul{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    color:$grey-5;
+    padding:10px;
+    font-size: 1.5rem;
+    font-weight: bolder;
+
+    li {
+      padding:5px;
+      margin:2px;
+      a{
+        padding:5px;
+        text-decoration: none;
+        color:inherit;
+        opacity: 0.4;
+
+        &.selected{
+          opacity:1;
+        }
+      }
+    }
+  }
+
+  .toggle-show-adder{
+    font-size:3rem;
+    color:$blue-2;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    margin-bottom:0.25rem;
+
+    &:hover{
+      color:$blue-1;
+    }
+  }
+
+}
