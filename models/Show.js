@@ -19,6 +19,9 @@ const ShowSchema = new Schema({
   country: {
     type: String,
   },
+  status: {
+    type: String,
+  },
   seenEpisodes: {
     type: [Number],
     default: [],
@@ -32,6 +35,7 @@ ShowSchema.methods.getPublic = function getPublic() {
     imdb: this.imdb,
     image: this.image,
     country: this.country,
+    status: this.status,
     seenEpisodes: this.seenEpisodes,
   };
 };

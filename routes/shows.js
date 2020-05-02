@@ -25,6 +25,7 @@ router.post('/', auth, async (req, res) => {
         imdb: show.imdb,
         image: show.image,
         country: show.country,
+        status: show.status,
       });
     }
     await req.user.save();
@@ -32,19 +33,6 @@ router.post('/', auth, async (req, res) => {
   } catch (error) {
     return res.status(400).json({ msg: 'Invalid shows. Shows require an id and name' });
   }
-});
-
-// @route   DELETE /shows/:id
-// @desc    Remove show from list
-// @access  Private
-router.delete('/:id', auth, async (req, res) => {
-  const index = req.user.shows.findIndex((s) => s._id === parseInt(req.params.id));
-  if (index === -1) {
-    return res.status(404).json({ msg: 'Show not found' });
-  }
-  req.user.shows.splice(index, 1);
-  await req.user.save();
-  res.status(200).json({ msg: 'OK' });
 });
 
 // @route   PATCH /shows
@@ -71,6 +59,57 @@ router.patch('/', auth, async (req, res) => {
   }
 
   req.user.shows = reordered;
+  await req.user.save();
+  res.status(200).json({ msg: 'OK' });
+});
+
+// @route   DELETE /shows/:id
+// @desc    Remove show from list
+// @access  Private
+router.delete('/:id', auth, async (req, res) => {
+  const index = req.user.shows.findIndex((s) => s._id === parseInt(req.params.id));
+  if (index === -1) {
+    return res.status(404).json({ msg: 'Show not found' });
+  }
+  req.user.shows.splice(index, 1);
+  await req.user.save();
+  res.status(200).json({ msg: 'OK' });
+});
+
+// @route   PATCH /shows/:id
+// @desc    Mark an episode as seen or unseen
+// @access  Private
+router.patch('/:id/episodes', auth, async (req, res) => {
+  const { markAs, episodeIds } = req.body;
+
+  if (!markAs || !episodeIds) {
+    return res.status(422).json({ msg: 'Need markAs and episodeIds' });
+  }
+
+  const showIndex = req.user.shows.findIndex((show) => {
+    return show._id === parseInt(req.params.id);
+  });
+
+  if (showIndex === -1) {
+    return res.status(404).json({ msg: 'Show not found' });
+  }
+
+  episodeIds.forEach((episodeId) => {
+    episodeId = parseInt(episodeId);
+    if (markAs === 'seen') {
+      if (!req.user.shows[showIndex].seenEpisodes.includes(episodeId)) {
+        req.user.shows[showIndex].seenEpisodes.push(episodeId);
+      }
+    } else if (markAs === 'unseen') {
+      const episodeIndex = req.user.shows[showIndex].seenEpisodes.indexOf(episodeId);
+      if (episodeIndex !== -1) {
+        req.user.shows[showIndex].seenEpisodes.splice(episodeIndex, 1);
+      }
+    } else {
+      return res.status(422).json({ msg: 'markAs must be "seen" or "unseen"' });
+    }
+  });
+
   await req.user.save();
   res.status(200).json({ msg: 'OK' });
 });

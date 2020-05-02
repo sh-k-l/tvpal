@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import setAuthToken from '../utils/setAuthToken';
+import { handleRequestEpisodes } from './episodes';
 
 export const SET_SHOWS = 'SET_SHOWS';
 export const SET_USER = 'SET_USER';
@@ -29,6 +30,8 @@ export const handleGetUser = () => async (dispatch) => {
       })
     );
     dispatch(setShows(user.shows));
+
+    user.shows.forEach((show) => dispatch(handleRequestEpisodes(show.id)));
   } catch (error) {
     console.log(error);
     dispatch(handleLogout());

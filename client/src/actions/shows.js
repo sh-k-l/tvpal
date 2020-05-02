@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
+import { handleRequestEpisodes } from './episodes';
+
 export const ADD_SHOW = 'ADD_SHOW';
 export const REORDER_SHOWS = 'REORDER_SHOWS';
+export const EPISODE_SEEN = 'EPISODE_SEEN';
+export const EPISODE_UNSEEN = 'EPISODE_UNSEEN';
 
 const addShow = (show) => ({
   type: ADD_SHOW,
@@ -18,7 +22,8 @@ export const handleAddShow = (show) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     });
-    dispatch(addShow(show));
+    dispatch(addShow({ ...show, seenEpisodes: [] }));
+    dispatch(handleRequestEpisodes(show.id));
   } catch (error) {
     console.log(error);
   } finally {
@@ -50,5 +55,43 @@ export const handleReorderShows = (from, to) => async (dispatch, getState) => {
   } catch (error) {
     console.log(error);
     dispatch(reorderShows(to, from));
+  }
+};
+
+const episodeSeen = (showId, episodeId) => ({
+  type: EPISODE_SEEN,
+  show: showId,
+  episode: episodeId,
+});
+
+const episodeUnseen = (showId, episodeId) => ({
+  type: EPISODE_UNSEEN,
+  show: showId,
+  episode: episodeId,
+});
+
+export const handleToggleEpisode = (showId, episodeId, as) => async (dispatch) => {
+  try {
+    if (as === 'seen') {
+      dispatch(episodeSeen(showId, episodeId));
+    } else if (as === 'unseen') {
+      dispatch(episodeUnseen(showId, episodeId));
+    } else {
+      return;
+    }
+
+    const body = JSON.stringify({ episodeIds: [episodeId], markAs: as });
+    await axios.patch(`/shows/${showId}/episodes`, body, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    if (as === 'seen') {
+      dispatch(episodeUnseen(showId, episodeId));
+    } else if (as === 'unseen') {
+      dispatch(episodeSeen(showId, episodeId));
+    }
   }
 };

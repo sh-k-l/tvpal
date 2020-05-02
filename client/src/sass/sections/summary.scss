@@ -1,0 +1,78 @@
+.summary{
+  display:flex;
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.summary-item{
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  margin:0.5rem;
+  max-width: 210px;
+}
+
+.summary-img{
+  overflow: hidden;
+
+  img {
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+    width:100%;
+  }
+}
+
+.summary-details{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:10px;
+
+  & > * {
+    margin:0;
+  }
+
+  p {
+    font-size: 0.8rem;
+    opacity: 0.5;
+  }
+}
+
+.summary-episodes {
+  
+
+  .season-selector{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+
+    .selector{
+      padding: 0 0.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+
+      &:hover{
+        color: $blue-1;
+      }
+    }
+
+    p{
+      margin:0;
+    }
+  }
+
+  .node-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    padding:5px;
+  }
+  .node{
+    height:10px;
+    width:10px;
+    margin:2px;
+    background-color: red;
+  }
+}

@@ -5,6 +5,7 @@
 @import './base/mixins.scss';
 @import './base/structure.scss';
 @import './base/inputs.scss';
+@import './base/responsiveness.scss';
 
 //COMPONENTS
 @import './components/modal.scss';
@@ -13,6 +14,8 @@
 //SECTIONS
 @import './sections/menu.scss';
 @import './sections/welcome.scss';
-@import './sections/watchlist.scss';
+@import './sections/rankings.scss';
 @import './sections/settings.scss';
 @import './sections/showadder.scss';
+@import './sections/backlog.scss';
+@import './sections/summary.scss';

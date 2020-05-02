@@ -1,0 +1,60 @@
+.backlog{
+
+}
+
+.backlog-row {
+  display:flex;
+  max-width:80vw;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+.backlog-head {
+  min-width: 90px;
+  max-width: 90px;
+  padding: 1rem;
+  @include light-gradient;
+  box-shadow: 10px 10px 10px;
+  color: $grey-1;
+  font-weight: lighter;
+
+  @include for-size(tablet-portrait-up) {    
+    min-width: 150px;
+    max-width: 150px;
+ }
+}
+
+.backlog-tail {
+  display:flex;
+  overflow: hidden;
+  padding:0.25rem;
+  // background-color: $blue-1;
+}
+
+.backlog-item {
+  min-width: 150px;
+  min-height: 60px;
+  @include box-shadow;
+  margin:0.25rem;
+  padding:0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+  .details{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+
+  &:hover{
+    box-shadow:none;
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+
+}

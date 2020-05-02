@@ -21,13 +21,14 @@ const Menu = ({ toggleShowAdder }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/watchlist" activeClassName="selected">
-            Watchlist
+          <NavLink to="/rankings" activeClassName="selected">
+            Rankings
           </NavLink>
         </li>
         <li>
           <NavLink to="/settings" activeClassName="selected">
-            Settings
+            {/* Settings */}
+            <i className="fas fa-cog"></i>
           </NavLink>
         </li>
       </ul>

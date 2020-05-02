@@ -39,7 +39,7 @@ const ShowAddingModal = ({ toggleVisibleModal, isOpen }) => {
   return (
     <Modal toggleVisibleModal={toggleVisibleModal} isOpen={isOpen} direction={'right'}>
       <div className="show-adder">
-        <h3>Add New Show</h3>
+        <h4>Add New Show</h4>
         <input
           type="search"
           value={search}

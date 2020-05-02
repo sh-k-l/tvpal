@@ -6,7 +6,7 @@ import { handleReorderShows } from '../../actions/shows';
 
 import Column from './Column';
 
-const Watchlist = ({ shows, reorderShows }) => {
+const Rankings = ({ shows, reorderShows }) => {
   const data = {
     shows: shows.reduce(
       (obj, item) => ((obj[item.id + ''] = { ...item, id: item.id + '' }), obj),
@@ -35,7 +35,7 @@ const Watchlist = ({ shows, reorderShows }) => {
   };
 
   return (
-    <div className="watchlist">
+    <div className="rankings">
       <DragDropContext onDragEnd={onDragEnd}>
         {data.columnOrder.map((columnId) => {
           const column = data.columns[columnId];
@@ -56,4 +56,4 @@ const mapDispatchToProps = (dispatch) => ({
   reorderShows: (from, to) => dispatch(handleReorderShows(from, to)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Watchlist);
+export default connect(mapStateToProps, mapDispatchToProps)(Rankings);

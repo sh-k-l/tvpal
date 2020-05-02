@@ -10,6 +10,7 @@ const ShowListItem = ({ show, alreadyAdded, addShowHandler }) => {
       imdb: show.externals.imdb,
       image: show.image ? show.image.medium : null,
       country: show.network ? show.network.country.code : null,
+      status: show.status,
     });
   };
 

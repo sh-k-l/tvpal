@@ -9,3 +9,9 @@ body{
   align-items: center;
   flex-direction: column;
 }
+
+.loading-bar{
+  background-color: $blue-1;
+  height: 5px; 
+  position: absolute;
+}

@@ -7,7 +7,7 @@ const TokenHandler = (props) => {
   const token = new URLSearchParams(search).get('token');
   setAuthToken(token);
   window.localStorage.setItem('token', token);
-  return <Redirect to="/watchlist" />;
+  return <Redirect to="/rankings" />;
 };
 
 export default TokenHandler;

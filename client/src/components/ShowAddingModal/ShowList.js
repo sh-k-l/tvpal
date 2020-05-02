@@ -5,7 +5,7 @@ import ShowListItem from './ShowListItem';
 
 import { handleAddShow } from '../../actions/shows';
 
-const ShowList = ({ shows, watchlist, addShow }) => {
+const ShowList = ({ shows, rankings, addShow }) => {
   if (shows === null) return null;
 
   return (
@@ -13,7 +13,7 @@ const ShowList = ({ shows, watchlist, addShow }) => {
       {shows
         .map((show) => show.show)
         .map((show) => {
-          const index = watchlist.findIndex((w) => {
+          const index = rankings.findIndex((w) => {
             return w.id === show.id;
           });
 
@@ -31,7 +31,7 @@ const ShowList = ({ shows, watchlist, addShow }) => {
 };
 
 const mapStateToProps = (state) => ({
-  watchlist: state.shows,
+  rankings: state.shows,
 });
 
 const mapDispatchToProps = (dispatch) => ({
