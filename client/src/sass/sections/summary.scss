@@ -1,5 +1,7 @@
 .summary{
   display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
   max-width: 80vw;
   margin: 0 auto;
 }
@@ -11,6 +13,7 @@
   overflow: hidden;
   margin:0.5rem;
   max-width: 210px;
+  text-align: center;
 }
 
 .summary-img{
@@ -24,55 +27,103 @@
   }
 }
 
-.summary-details{
+.summary-content{
   display:flex;
-  justify-content: space-between;
-  align-items: center;
-  padding:10px;
+  flex-direction: column;
+  padding:10px;  
 
-  & > * {
-    margin:0;
+  h5 {
+    margin: 0.25rem 0;    
+    height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &.small {
+      font-size: 0.8rem;
+      line-height: 1rem;
+    }
   }
 
-  p {
+}
+
+.summary-details{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:5px;
+    width:50%;
+    height:100%;
+  }
+
+  p{
+    margin: 0;
+    width: 100%;
+    
+    color:$grey-4;
+  }
+
+  .percentage {
+    font-size: 1.5rem;
+    font-weight: lighter;
+  }
+
+  .button {
+    font-size: 0.9rem;
+  }
+
+  .status {
+    opacity: 0.8;
     font-size: 0.8rem;
-    opacity: 0.5;
+    &.Running{
+      color: $green-1;
+    }
+    &.Ended{
+      color: $red-1;
+    }
   }
 }
 
-.summary-episodes {
+
+
+// .summary-episodes {
   
 
-  .season-selector{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0.5rem 0;
+//   .season-selector{
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     margin: 0.5rem 0;
 
-    .selector{
-      padding: 0 0.5rem;
-      cursor: pointer;
-      transition: color 0.3s ease-in-out;
+//     .selector{
+//       padding: 0 0.5rem;
+//       cursor: pointer;
+//       transition: color 0.3s ease-in-out;
 
-      &:hover{
-        color: $blue-1;
-      }
-    }
+//       &:hover{
+//         color: $blue-1;
+//       }
+//     }
 
-    p{
-      margin:0;
-    }
-  }
+//     p{
+//       margin:0;
+//     }
+//   }
 
-  .node-wrapper{
-    display: flex;
-    flex-wrap: wrap;
-    padding:5px;
-  }
-  .node{
-    height:10px;
-    width:10px;
-    margin:2px;
-    background-color: red;
-  }
-}
+//   .node-wrapper{
+//     display: flex;
+//     flex-wrap: wrap;
+//     padding:5px;
+//   }
+//   .node{
+//     height:10px;
+//     width:10px;
+//     margin:2px;
+//     background-color: red;
+//   }
+// }

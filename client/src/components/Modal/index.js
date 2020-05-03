@@ -8,7 +8,7 @@ const Modal = ({ toggleVisibleModal, isOpen, direction, children }) => {
       // default false
       isOpen={isOpen}
       // default 60%
-      width={'40%'}
+      width={'80%'}
       // default from right
       directionFrom={direction}
       // default Modal
@@ -26,7 +26,8 @@ const Modal = ({ toggleVisibleModal, isOpen, direction, children }) => {
       overlayClassName={'string'}
     >
       <div className="close" onClick={toggleVisibleModal}>
-        <img alt="close modal" src={process.env.PUBLIC_URL + '/img/close.svg'} />
+        {/* <img alt="close modal" src={process.env.PUBLIC_URL + '/img/close.svg'} /> */}
+        <i className="far fa-times-circle"></i>
       </div>
       {children}
     </RMSModal>

@@ -1,0 +1,79 @@
+.calendar{
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.week-picker{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:10px;
+
+  @include for-size(tablet-portrait-up) {
+    justify-content: flex-end;
+  }
+
+  .selector {
+    padding:5px;
+    margin: 5px;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+    &:hover{
+      color: $blue-1
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.days-wrapper {
+  display: flex;
+  overflow-x: auto;
+  
+  .day {
+    flex: 1;
+    min-width: 100px;
+    min-height: 50vh;
+
+    &.today{
+      background-color: $grey-1;
+    }
+
+    &:not(:last-child){
+      border-right: 1px solid $grey-5;
+    }
+
+    .head {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      border-bottom: 2px solid $grey-5;
+      padding:5px;
+
+      span{
+        opacity: 0.5;
+        font-size: 0.8rem;
+      }
+    }
+
+    .tail {
+      p {
+        margin: 3px 0;
+        font-size: 0.9rem;
+      }
+
+      .episode {
+        padding:5px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+      }
+
+      .number{
+        opacity:0.5;
+      }
+    }
+  }
+}

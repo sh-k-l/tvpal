@@ -1,0 +1,32 @@
+.manage-show{
+
+  .remove {
+
+  }
+
+  .season {
+    display: flex;
+    flex-direction: column;
+
+    .node-wrapper{
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .node {
+      width:12px;
+      height:12px;
+      background-color: $red-2;
+      margin:1px;
+      cursor: pointer;
+
+      &.seen{
+        background-color: $green-1;
+      }
+
+      &:hover{
+        transform: scale(1.2);
+      }
+    }
+  }
+}

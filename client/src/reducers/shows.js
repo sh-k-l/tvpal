@@ -1,4 +1,10 @@
-import { ADD_SHOW, REORDER_SHOWS, EPISODE_SEEN, EPISODE_UNSEEN } from '../actions/shows';
+import {
+  ADD_SHOW,
+  REMOVE_SHOW,
+  REORDER_SHOWS,
+  EPISODE_SEEN,
+  EPISODE_UNSEEN,
+} from '../actions/shows';
 import { SET_SHOWS } from '../actions/user';
 
 export default (state = null, action) => {
@@ -7,20 +13,27 @@ export default (state = null, action) => {
       return action.shows;
     case ADD_SHOW:
       return [...state, action.show];
+    case REMOVE_SHOW: {
+      const showIndex = state.findIndex((show) => show.id === action.show);
+      const newShows = JSON.parse(JSON.stringify(state));
+      if (showIndex !== -1) newShows.splice(showIndex, 1);
+      return newShows;
+    }
     case REORDER_SHOWS: {
-      const newShows = [...state];
+      const newShows = JSON.parse(JSON.stringify(state));
       newShows.splice(action.to, 0, newShows.splice(action.from, 1)[0]);
       return newShows;
     }
     case EPISODE_SEEN: {
       const showIndex = state.findIndex((show) => show.id === action.show);
-      const newShows = [...state];
+      const newShows = JSON.parse(JSON.stringify(state));
       newShows[showIndex].seenEpisodes.push(action.episode);
       return newShows;
     }
     case EPISODE_UNSEEN: {
       const showIndex = state.findIndex((show) => show.id === action.show);
-      const newShows = [...state];
+      console.log(state);
+      const newShows = JSON.parse(JSON.stringify(state));
       newShows[showIndex].seenEpisodes = newShows[showIndex].seenEpisodes.filter(
         (ep) => ep !== action.episode
       );

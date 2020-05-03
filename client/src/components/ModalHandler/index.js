@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ShowAddingModal from '../ShowAddingModal';
+import ManageShowModal from '../ManageShowModal';
 import { handleToggleModal } from '../../actions/modals';
 
 const ModalHandler = ({ modals, toggleModal }) => {
@@ -9,6 +10,10 @@ const ModalHandler = ({ modals, toggleModal }) => {
       <ShowAddingModal
         isOpen={modals['show-adder']}
         toggleVisibleModal={() => toggleModal('show-adder')}
+      />
+      <ManageShowModal
+        isOpen={modals['manage-show']}
+        toggleVisibleModal={() => toggleModal('manage-show')}
       />
     </>
   );
@@ -19,7 +24,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleModal: (modal) => dispatch(handleToggleModal(modal)),
+  toggleModal: (modal, show) => dispatch(handleToggleModal(modal, show)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalHandler);

@@ -1,10 +1,12 @@
 .modal{ 
   padding:2rem;
+  overflow-y: auto;
   
   .close{
     margin: 0 auto;    
-    padding: 10px;
+    font-size: 2rem;
     cursor: pointer;
+
 
     img{
       width:30px;

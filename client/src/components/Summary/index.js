@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SummaryItem from './SummaryItem.js';
-import { handleToggleEpisode } from '../../actions/shows';
+import { handleToggleModal } from '../../actions/modals';
 
-const Summary = ({ shows, toggleEpisode }) => {
-  console.log(shows);
+const Summary = ({ shows, toggleManageShow }) => {
   return (
     <div className="summary">
       {shows.map((show) => (
-        <SummaryItem show={show} toggleEpisode={toggleEpisode} key={show.id} />
+        <SummaryItem show={show} key={show.id} toggleManageShow={toggleManageShow} />
       ))}
     </div>
   );
@@ -29,7 +28,7 @@ const mapStateToProps = (state) => {
       return;
     }
 
-    showEmbedded.episodes = episodes[show.id];
+    showEmbedded.episodes = episodes[show.id].filter((ep) => Date.now() >= new Date(ep.airstamp));
 
     output.push(showEmbedded);
   });
@@ -38,7 +37,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleEpisode: (showId, episodeId, as) => dispatch(handleToggleEpisode(showId, episodeId, as)),
+  toggleManageShow: (showId) => dispatch(handleToggleModal('manage-show', showId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Summary);

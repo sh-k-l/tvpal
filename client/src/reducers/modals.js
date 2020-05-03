@@ -2,6 +2,8 @@ import { TOGGLE_MODAL } from '../actions/modals';
 
 const defaultState = {
   'show-adder': false,
+  'manage-show': false,
+  show: null,
 };
 
 export default (state = defaultState, action) => {
@@ -10,6 +12,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         [action.modal]: !state[action.modal],
+        show: action.show ? action.show : null,
       };
     default:
       return state;

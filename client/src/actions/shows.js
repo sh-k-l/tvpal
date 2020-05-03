@@ -4,6 +4,7 @@ import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { handleRequestEpisodes } from './episodes';
 
 export const ADD_SHOW = 'ADD_SHOW';
+export const REMOVE_SHOW = 'REMOVE_SHOW';
 export const REORDER_SHOWS = 'REORDER_SHOWS';
 export const EPISODE_SEEN = 'EPISODE_SEEN';
 export const EPISODE_UNSEEN = 'EPISODE_UNSEEN';
@@ -24,6 +25,23 @@ export const handleAddShow = (show) => async (dispatch) => {
     });
     dispatch(addShow({ ...show, seenEpisodes: [] }));
     dispatch(handleRequestEpisodes(show.id));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(hideLoading());
+  }
+};
+
+const removeShow = (show) => ({
+  type: REMOVE_SHOW,
+  show,
+});
+
+export const handleRemoveShow = (showId) => async (dispatch) => {
+  try {
+    dispatch(showLoading());
+    await axios.delete(`shows/${showId}`);
+    dispatch(removeShow(showId));
   } catch (error) {
     console.log(error);
   } finally {
@@ -70,7 +88,7 @@ const episodeUnseen = (showId, episodeId) => ({
   episode: episodeId,
 });
 
-export const handleToggleEpisode = (showId, episodeId, as) => async (dispatch) => {
+export const handleToggleEpisodes = (showId, episodeId, as) => async (dispatch) => {
   try {
     if (as === 'seen') {
       dispatch(episodeSeen(showId, episodeId));
