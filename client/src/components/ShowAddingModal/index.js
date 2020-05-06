@@ -9,7 +9,7 @@ const ShowAddingModal = ({ toggleVisibleModal, isOpen }) => {
   const [shows, setShows] = useState(null);
 
   useEffect(() => {
-    if (search.length < 4) {
+    if (search.length == 0) {
       setShows(null);
       return;
     }

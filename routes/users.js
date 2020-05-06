@@ -25,7 +25,18 @@ router.get('/:username', async (req, res) => {
     return res.status(404).json({ msg: 'User does not exist' });
   }
 
-  res.json(user.getPublic());
+  const out = {
+    name: user.name,
+    username: user.username,
+    shows: user.shows.map((s) => ({
+      id: s.id,
+      name: s.name,
+      image: s.image,
+      imdb: s.imdb,
+    })),
+  };
+
+  res.json(out);
 });
 
 // @route   GET /users/search?q=

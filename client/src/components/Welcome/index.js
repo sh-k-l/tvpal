@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-scroll';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import GoogleButton from '../GoogleButton';
+import GoogleButton from './GoogleButton';
 
-const Welcome = () => {
+const Welcome = ({ authenticated }) => {
+  if (authenticated) return <Redirect to="/backlog" />;
+
   return (
     <>
       <div className="fill-and-center welcome">
@@ -21,7 +25,7 @@ const Welcome = () => {
           What is TV Pal?
         </Link>
       </div>
-      <div className="fill-and-center details" name="details">
+      {/* <div className="fill-and-center details" name="details">
         <ul>
           <li>Lorem ipsum dolor sit amet consectetur</li>
           <li>Lorem ipsum dolor sit amet consectetur</li>
@@ -29,9 +33,13 @@ const Welcome = () => {
           <li>Lorem ipsum dolor sit amet consectetur</li>
           <li>Lorem ipsum dolor sit amet consectetur</li>
         </ul>
-      </div>
+      </div> */}
     </>
   );
 };
 
-export default Welcome;
+const mapStateToProps = (state) => ({
+  authenticated: state.user !== null,
+});
+
+export default connect(mapStateToProps)(Welcome);

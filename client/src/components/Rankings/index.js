@@ -1,12 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { Link } from 'react-router-dom';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import NoShowsYet from '../NoShowsYet';
 
 import { handleReorderShows } from '../../actions/shows';
 
 import Column from './Column';
 
-const Rankings = ({ shows, reorderShows }) => {
+const Rankings = ({ shows, username, reorderShows }) => {
+  if (shows.length === 0) {
+    return <NoShowsYet />;
+  }
+
   const data = {
     shows: shows.reduce(
       (obj, item) => ((obj[item.id + ''] = { ...item, id: item.id + '' }), obj),
@@ -34,22 +41,47 @@ const Rankings = ({ shows, reorderShows }) => {
     reorderShows(source.index, destination.index);
   };
 
-  return (
-    <div className="rankings">
-      <DragDropContext onDragEnd={onDragEnd}>
-        {data.columnOrder.map((columnId) => {
-          const column = data.columns[columnId];
-          const showsInColumn = column.showIds.map((showId) => data.shows[showId]);
+  let shareUrl = window.location.href.split('/');
+  shareUrl.splice(shareUrl.length - 1, 1);
+  shareUrl.push('u/' + username);
+  shareUrl = shareUrl.join('/');
 
-          return <Column key={columnId} column={column} shows={showsInColumn} />;
-        })}
-      </DragDropContext>
-    </div>
+  return (
+    <>
+      <div className="rankings">
+        <div className="header">
+          {!username ? (
+            <p className="center">
+              Add a username <Link to="/settings">here</Link> to share this list!
+            </p>
+          ) : (
+            <CopyToClipboard text={shareUrl}>
+              <div className="button">Copy Share Link</div>
+            </CopyToClipboard>
+          )}
+          <div className="how-to">
+            Drag <div className="handle" /> to reorder
+          </div>
+        </div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          {data.columnOrder.map((columnId) => {
+            const column = data.columns[columnId];
+            const showsInColumn = column.showIds.map((showId) => data.shows[showId]);
+
+            return <Column key={columnId} column={column} shows={showsInColumn} />;
+          })}
+        </DragDropContext>
+      </div>
+    </>
   );
 };
 
 const mapStateToProps = (state) => ({
   shows: state.shows,
+  username:
+    state.user.username === null || typeof state.user.username === 'undefined'
+      ? false
+      : state.user.username,
 });
 
 const mapDispatchToProps = (dispatch) => ({

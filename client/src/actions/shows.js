@@ -6,8 +6,8 @@ import { handleRequestEpisodes } from './episodes';
 export const ADD_SHOW = 'ADD_SHOW';
 export const REMOVE_SHOW = 'REMOVE_SHOW';
 export const REORDER_SHOWS = 'REORDER_SHOWS';
-export const EPISODE_SEEN = 'EPISODE_SEEN';
-export const EPISODE_UNSEEN = 'EPISODE_UNSEEN';
+export const EPISODES_SEEN = 'EPISODE_SEEN';
+export const EPISODES_UNSEEN = 'EPISODE_UNSEEN';
 
 const addShow = (show) => ({
   type: ADD_SHOW,
@@ -76,29 +76,31 @@ export const handleReorderShows = (from, to) => async (dispatch, getState) => {
   }
 };
 
-const episodeSeen = (showId, episodeId) => ({
-  type: EPISODE_SEEN,
+const episodesSeen = (showId, episodeIds) => ({
+  type: EPISODES_SEEN,
   show: showId,
-  episode: episodeId,
+  episodes: episodeIds,
 });
 
-const episodeUnseen = (showId, episodeId) => ({
-  type: EPISODE_UNSEEN,
+const episodesUnseen = (showId, episodeIds) => ({
+  type: EPISODES_UNSEEN,
   show: showId,
-  episode: episodeId,
+  episodes: episodeIds,
 });
 
-export const handleToggleEpisodes = (showId, episodeId, as) => async (dispatch) => {
+export const handleToggleEpisodes = (showId, episodeIds, as) => async (dispatch) => {
   try {
+    if (episodeIds.length === 0) return;
+
     if (as === 'seen') {
-      dispatch(episodeSeen(showId, episodeId));
+      dispatch(episodesSeen(showId, episodeIds));
     } else if (as === 'unseen') {
-      dispatch(episodeUnseen(showId, episodeId));
+      dispatch(episodesUnseen(showId, episodeIds));
     } else {
       return;
     }
 
-    const body = JSON.stringify({ episodeIds: [episodeId], markAs: as });
+    const body = JSON.stringify({ episodeIds, markAs: as });
     await axios.patch(`/shows/${showId}/episodes`, body, {
       headers: {
         'Content-Type': 'application/json',
@@ -107,9 +109,9 @@ export const handleToggleEpisodes = (showId, episodeId, as) => async (dispatch) 
   } catch (error) {
     console.log(error);
     if (as === 'seen') {
-      dispatch(episodeUnseen(showId, episodeId));
+      dispatch(episodesUnseen(showId, episodeIds));
     } else if (as === 'unseen') {
-      dispatch(episodeSeen(showId, episodeId));
+      dispatch(episodesSeen(showId, episodeIds));
     }
   }
 };

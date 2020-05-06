@@ -4,7 +4,7 @@ import Modal from '../Modal';
 import Season from './Season';
 import { handleRemoveShow, handleToggleEpisodes } from '../../actions/shows';
 
-const ManageShowModal = ({ toggleVisibleModal, isOpen, show, removeShow, toggleEpisode }) => {
+const ManageShowModal = ({ toggleVisibleModal, isOpen, show, removeShow, toggleEpisodes }) => {
   if (show === null) return null;
 
   const seasons = [];
@@ -14,7 +14,7 @@ const ManageShowModal = ({ toggleVisibleModal, isOpen, show, removeShow, toggleE
         showId={show.id}
         season={season}
         episodes={show.episodes[season]}
-        toggleEpisode={toggleEpisode}
+        toggleEpisodes={toggleEpisodes}
         seenEpisodes={show.seenEpisodes}
         key={season}
       />
@@ -41,15 +41,17 @@ const mapStateToProps = (state) => {
   const show = shows.find((show) => show.id === modals.show);
   if (!show) return { show: null };
 
-  const myEpisodes = episodes[show.id];
+  const myEpisodes = episodes[show.id].filter((ep) => Date.now() >= new Date(ep.airstamp));
 
-  show.episodes = {};
-  const firstSeason = myEpisodes[0].season;
-  const lastSeason = myEpisodes[myEpisodes.length - 1].season;
+  if (myEpisodes.length !== 0) {
+    show.episodes = {};
+    const firstSeason = myEpisodes[0].season;
+    const lastSeason = myEpisodes[myEpisodes.length - 1].season;
 
-  for (let s = firstSeason; s <= lastSeason; s++) {
-    const season = myEpisodes.filter((ep) => ep.season === s);
-    show.episodes[s] = season;
+    for (let s = firstSeason; s <= lastSeason; s++) {
+      const season = myEpisodes.filter((ep) => ep.season === s);
+      show.episodes[s] = season;
+    }
   }
 
   return {
@@ -63,7 +65,8 @@ const setDispatchToProps = (dispatch) => ({
       dispatch(handleRemoveShow(showId));
     }
   },
-  toggleEpisode: (showId, episodeId, as) => dispatch(handleToggleEpisodes(showId, episodeId, as)),
+  toggleEpisodes: (showId, episodeIds, as) =>
+    dispatch(handleToggleEpisodes(showId, episodeIds, as)),
 });
 
 export default connect(mapStateToProps, setDispatchToProps)(ManageShowModal);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Season = ({ showId, season, episodes, seenEpisodes, toggleEpisode }) => {
+const Season = ({ showId, season, episodes, seenEpisodes, toggleEpisodes }) => {
   const [epTitle, setEpTitle] = useState(null);
 
   return (
@@ -12,13 +12,39 @@ const Season = ({ showId, season, episodes, seenEpisodes, toggleEpisode }) => {
           return (
             <div
               className={isSeen ? 'node seen' : 'node'}
-              onClick={() => toggleEpisode(showId, ep.id, isSeen ? 'unseen' : 'seen')}
+              onClick={() => toggleEpisodes(showId, [ep.id], isSeen ? 'unseen' : 'seen')}
               key={ep.id}
               onMouseEnter={() => setEpTitle(`${ep.number}: ${ep.name}`)}
               onMouseLeave={() => setEpTitle(null)}
             ></div>
           );
         })}
+      </div>
+      <div className="mark-wrapper">
+        <div
+          className="button"
+          onClick={() =>
+            toggleEpisodes(
+              showId,
+              episodes.filter((ep) => seenEpisodes.includes(ep.id)).map((ep) => ep.id),
+              'unseen'
+            )
+          }
+        >
+          Mark All <i className="fas fa-times"></i>
+        </div>
+        <div
+          className="button"
+          onClick={() =>
+            toggleEpisodes(
+              showId,
+              episodes.filter((ep) => !seenEpisodes.includes(ep.id)).map((ep) => ep.id),
+              'seen'
+            )
+          }
+        >
+          Mark All <i className="fas fa-check"></i>
+        </div>
       </div>
     </div>
   );

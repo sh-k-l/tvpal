@@ -18,7 +18,8 @@ const ShowListItem = ({ show, alreadyAdded, addShowHandler }) => {
     <li onClick={handleAdd}>
       <p className={alreadyAdded ? 'added' : null}>
         {' '}
-        {show.name} {alreadyAdded && <i className="far fa-check-circle"></i>}
+        {show.network ? `${show.name} (${show.network.country.code}) ` : `${show.name} `}
+        {alreadyAdded && <i className="far fa-check-circle"></i>}
       </p>
     </li>
   );

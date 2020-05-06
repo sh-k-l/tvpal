@@ -1,8 +1,19 @@
 .manage-show{
 
-  .remove {
 
+  .mark-wrapper{
+    display: flex;
+    .button{
+      max-width: 135px;
+      text-align: center;
+      margin-right: 1rem;
+
+      i{
+        margin-left: 5px;
+      }
+    }
   }
+
 
   .season {
     display: flex;

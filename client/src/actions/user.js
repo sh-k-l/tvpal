@@ -2,6 +2,7 @@ import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import setAuthToken from '../utils/setAuthToken';
 import { handleRequestEpisodes } from './episodes';
+import { setAlert } from './alerts';
 
 export const SET_SHOWS = 'SET_SHOWS';
 export const SET_USER = 'SET_USER';
@@ -30,6 +31,7 @@ export const handleGetUser = () => async (dispatch) => {
       })
     );
     dispatch(setShows(user.shows));
+    dispatch(setAlert(`Hi ${user.name.split(' ')[0]}! 👋`, 'success'));
 
     user.shows.forEach((show) => dispatch(handleRequestEpisodes(show.id)));
   } catch (error) {
@@ -46,7 +48,6 @@ const addUsername = (username) => ({
 });
 
 export const handleAddUsername = (username) => async (dispatch) => {
-  console.log(username);
   try {
     const body = JSON.stringify({ username: username });
     await axios.patch('/users/addusername', body, {
@@ -57,9 +58,18 @@ export const handleAddUsername = (username) => async (dispatch) => {
 
     dispatch(addUsername(username));
   } catch (error) {
-    console.log(error);
+    if (error.response.data.errors) {
+      error.response.data.errors.forEach((err) => {
+        dispatch(setAlert(err.msg, 'error'));
+      });
+    } else {
+      dispatch(setAlert(error.response.data.msg, 'error'));
+    }
   }
 };
+
+//TODO
+export const handleDeleteUser = () => async (dispatch) => {};
 
 export const handleLogout = () => {
   window.localStorage.removeItem('token');

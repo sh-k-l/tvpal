@@ -1,20 +1,62 @@
+.user-ranking{
+  max-width: 80vw;
+  margin: 0 auto;
+  margin-top: 5rem;
+
+  h4{
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .to-home {
+    color: inherit;
+  }
+
+  .rankings{
+    margin-top:2rem;
+  }
+}
+
+
+
+.center{
+  text-align: center;
+  max-width: 80vw;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+}
+
 .rankings{
+
+  .header{
+    text-align: center;
+  }
+
+  .how-to{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    max-width: 80vw;
+    margin: 0 auto;
+    color: $grey-3;
+  }
 
   .column-container{
     display:flex;
     align-items: center;
     justify-content: center;
-    max-width: 80vw;
-    margin: 0 auto;
   }
 
   .column {
     counter-reset: gradient-counter;
     list-style: none;
-    margin: 0.75rem 0;
     padding-left: 1rem;
-    width:100%;
+    max-width:80vw;
+    width: 100%;
 
+    
     .show {
       display:flex;    
       align-items: center;
@@ -38,15 +80,7 @@
         }
       }
 
-      .handle {
-        $size: 22px;
-        max-height:$size;
-        min-height:$size;
-        max-width:$size;
-        min-width:$size;
-        border-radius: 5px;
-        background-color: $blue-1;        
-      }     
+
 
       &::after {
         box-sizing: border-box;
@@ -74,3 +108,16 @@
   }
 
 }
+
+.handle {
+  $size: 22px;
+  max-height:$size;
+  min-height:$size;
+  max-width:$size;
+  min-width:$size;
+  border-radius: 5px;
+  background-color: $blue-1;     
+  display: inline-block;  
+  margin: 0 5px 0 5px; 
+}     
+

@@ -15,7 +15,7 @@ const Settings = ({ user, logout, addUsername }) => {
       <div className="group">
         <p>Logged in as:</p>{' '}
         <p>
-          <b>{user.name}</b> <i>({user.email})</i>
+          <b>{user.username ? `${user.name} (${user.username})` : user.name}</b> <i>{user.email}</i>
         </p>
         <div className="button red logout" onClick={logout}>
           Log Out

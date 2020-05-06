@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SummaryItem from './SummaryItem.js';
+import NoShowsYet from '../NoShowsYet';
 import { handleToggleModal } from '../../actions/modals';
 
 const Summary = ({ shows, toggleManageShow }) => {
+  if (shows.length === 0) {
+    return <NoShowsYet />;
+  }
+
   return (
     <div className="summary">
       {shows.map((show) => (

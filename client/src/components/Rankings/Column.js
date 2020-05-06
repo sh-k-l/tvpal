@@ -1,6 +1,6 @@
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
-import Show from './Show';
+import DraggableShow from './DraggableShow';
 
 const Column = ({ column, shows }) => {
   return (
@@ -9,7 +9,7 @@ const Column = ({ column, shows }) => {
         {(provided) => (
           <div className="column" ref={provided.innerRef} {...provided.droppableProps}>
             {shows.map((show, index) => {
-              return <Show key={show.id} show={show} index={index} />;
+              return <DraggableShow key={show.id} show={show} index={index} />;
             })}
             {provided.placeholder}
           </div>

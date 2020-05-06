@@ -5,7 +5,7 @@ const SummaryItem = ({ show, toggleManageShow }) => {
 
   if (show.status === 'To Be Determined') show.status = 'TBD';
 
-  if (show.episodes) {
+  if (show.episodes && show.episodes.length > 0) {
     percentageComplete = Math.round((show.seenEpisodes.length / show.episodes.length) * 100, 0);
   }
 
@@ -18,8 +18,8 @@ const SummaryItem = ({ show, toggleManageShow }) => {
         <h5 className={show.name.length > 18 ? 'small' : null}>{show.name}</h5>
         <div className="summary-details">
           <div>
-            <p className="percentage">{percentageComplete}%</p>
             <p className={`status ${show.status}`}>{show.status}</p>
+            <p className="percentage">{percentageComplete}%</p>
           </div>
           <div>
             <div className="button" onClick={() => toggleManageShow(show.id)}>

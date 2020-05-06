@@ -1,9 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import BacklogRow from './BacklogRow';
+import NoShowsYet from '../NoShowsYet';
 import { handleToggleEpisodes } from '../../actions/shows';
 
 const Backlog = ({ shows, toggleEpisode }) => {
+  if (shows === null) {
+    return null;
+  }
+  if (shows.length === 0) {
+    return <NoShowsYet />;
+  }
   return (
     <div className="backlog">
       {shows.map((show) => (
@@ -15,6 +22,12 @@ const Backlog = ({ shows, toggleEpisode }) => {
 
 const mapStateToProps = (state) => {
   const { shows, episodes } = state;
+
+  if (shows === null) {
+    return {
+      shows: null,
+    };
+  }
 
   const output = [];
 
@@ -30,7 +43,9 @@ const mapStateToProps = (state) => {
 
     // Check episodes against seen episodes
     showEmbedded.episodes = episodes[show.id].filter((ep) => {
-      return !show.seenEpisodes.includes(ep.id) && Date.now() >= new Date(ep.airstamp);
+      return (
+        ep.airstamp && !show.seenEpisodes.includes(ep.id) && Date.now() >= new Date(ep.airstamp)
+      );
     });
 
     // Don't need shows without any outstanding episodes
@@ -43,7 +58,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleEpisode: (showId, episodeId, as) => dispatch(handleToggleEpisodes(showId, episodeId, as)),
+  toggleEpisode: (showId, episodeId, as) => dispatch(handleToggleEpisodes(showId, [episodeId], as)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Backlog);
