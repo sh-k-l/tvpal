@@ -6,6 +6,7 @@ const errorHandler = require('./middleware/errorHandler');
 const auth = require('./routes/auth');
 const shows = require('./routes/shows');
 const users = require('./routes/users');
+const path = require('path');
 const passport = require('./config/passport').passport;
 const connectToDatabase = require('./config/db');
 
@@ -23,7 +24,10 @@ app.use('/api/users', users);
 app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+  // app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
+  });
 }
 
 const PORT = process.env.PORT || 5000;
