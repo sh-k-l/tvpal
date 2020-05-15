@@ -7,7 +7,7 @@ const User = ({ match }) => {
   const username = match.params.username;
   const [details, setDetails] = useState(null);
   useEffect(() => {
-    axios.get(`/users/${username}`).then((res) => {
+    axios.get(`/api/users/${username}`).then((res) => {
       setDetails(res.data);
     });
   }, [username]);

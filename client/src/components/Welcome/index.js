@@ -14,7 +14,7 @@ const Welcome = ({ authenticated }) => {
         <h4>📺</h4>
         <h1>TV Pal</h1>
         <GoogleButton />
-        <Link
+        {/* <Link
           activeClass="active"
           className="info"
           to="details"
@@ -23,7 +23,7 @@ const Welcome = ({ authenticated }) => {
           duration={500}
         >
           What is TV Pal?
-        </Link>
+        </Link> */}
       </div>
       {/* <div className="fill-and-center details" name="details">
         <ul>

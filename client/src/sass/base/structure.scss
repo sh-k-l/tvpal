@@ -1,3 +1,8 @@
+// Fix jumping scrollbar
+html { 
+  margin-left: calc(100vw - 100%); 
+}
+
 body{
   background-color: $grey-1;
 }

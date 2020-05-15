@@ -14,5 +14,3 @@ export const handleToggleModal = (modal, show) => (dispatch) => {
     });
   }
 };
-
-export const setSelectedShow = (id) => (dispatch) => {};

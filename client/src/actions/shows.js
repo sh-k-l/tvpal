@@ -18,7 +18,7 @@ export const handleAddShow = (show) => async (dispatch) => {
   try {
     dispatch(showLoading());
     const body = JSON.stringify({ shows: [show] });
-    await axios.post('/shows', body, {
+    await axios.post('/api/shows', body, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -40,7 +40,7 @@ const removeShow = (show) => ({
 export const handleRemoveShow = (showId) => async (dispatch) => {
   try {
     dispatch(showLoading());
-    await axios.delete(`shows/${showId}`);
+    await axios.delete(`/api/shows/${showId}`);
     dispatch(removeShow(showId));
   } catch (error) {
     console.log(error);
@@ -65,7 +65,7 @@ export const handleReorderShows = (from, to) => async (dispatch, getState) => {
     newShowOrder.splice(to, 0, newShowOrder.splice(from, 1)[0]);
 
     const body = JSON.stringify({ order: newShowOrder });
-    await axios.patch('/shows', body, {
+    await axios.patch('/api/shows', body, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -101,7 +101,7 @@ export const handleToggleEpisodes = (showId, episodeIds, as) => async (dispatch)
     }
 
     const body = JSON.stringify({ episodeIds, markAs: as });
-    await axios.patch(`/shows/${showId}/episodes`, body, {
+    await axios.patch(`/api/shows/${showId}/episodes`, body, {
       headers: {
         'Content-Type': 'application/json',
       },

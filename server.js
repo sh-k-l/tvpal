@@ -16,11 +16,15 @@ app.use(express.json());
 app.use(passport.initialize());
 
 app.get('/', (req, res) => res.send('API Running'));
-app.use('/auth', auth);
-app.use('/shows', shows);
-app.use('/users', users);
+app.use('/api/auth', auth);
+app.use('/api/shows', shows);
+app.use('/api/users', users);
 
 app.use(errorHandler);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
 
 const PORT = process.env.PORT || 5000;
 

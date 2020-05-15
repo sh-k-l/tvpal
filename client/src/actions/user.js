@@ -22,7 +22,7 @@ const setShows = (shows) => ({
 export const handleGetUser = () => async (dispatch) => {
   try {
     dispatch(showLoading());
-    const { data: user } = await axios.get('/users/me');
+    const { data: user } = await axios.get('/api/users/me');
     dispatch(
       setUser({
         username: user.username,
@@ -50,7 +50,7 @@ const addUsername = (username) => ({
 export const handleAddUsername = (username) => async (dispatch) => {
   try {
     const body = JSON.stringify({ username: username });
-    await axios.patch('/users/addusername', body, {
+    await axios.patch('/api/users/addusername', body, {
       headers: {
         'Content-Type': 'application/json',
       },
