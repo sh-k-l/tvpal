@@ -15,7 +15,7 @@ connectToDatabase();
 app.use(express.json());
 app.use(passport.initialize());
 
-app.get('/', (req, res) => res.send('API Running'));
+// app.get('/', (req, res) => res.send('API Running'));
 app.use('/api/auth', auth);
 app.use('/api/shows', shows);
 app.use('/api/users', users);
