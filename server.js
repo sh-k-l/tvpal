@@ -23,7 +23,7 @@ app.use('/api/users', users);
 app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/app', express.static(__dirname + '/client/build'));
+  app.use('/app', express.static('client/build'));
 }
 
 const PORT = process.env.PORT || 5000;

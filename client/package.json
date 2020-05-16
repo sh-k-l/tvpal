@@ -49,5 +49,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "homepage": "https://tv-pal-2020.herokuapp.com/app"
 }
