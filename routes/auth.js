@@ -16,9 +16,9 @@ router.get('/google/callback', passport.authenticate('google'), (req, res) => {
   const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1w' });
 
   if (process.env.NODE_ENV === 'development') {
-    res.redirect(`http://localhost:3000/auth?token=${token}`);
+    res.redirect(`http://localhost:3000/app/auth?token=${token}`);
   } else {
-    res.redirect(`http://tv-pal-2020.herokuapp.com/auth?token=${token}`);
+    res.redirect(`http://tv-pal-2020.herokuapp.com/app/auth?token=${token}`);
   }
 });
 

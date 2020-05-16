@@ -1,6 +1,7 @@
 require('dotenv').config();
 require('express-async-errors');
 
+const path = require('path');
 const express = require('express');
 const errorHandler = require('./middleware/errorHandler');
 const auth = require('./routes/auth');
@@ -23,7 +24,11 @@ app.use('/api/users', users);
 app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/app', express.static('client/build'));
+  express.static('client/build');
+  app.use('/app', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '/client/build/index.html'));
+  });
+  // app.use('/app', express.static('client/build'));
 }
 
 const PORT = process.env.PORT || 5000;
