@@ -34,7 +34,7 @@ const App = ({ getUser }) => {
       <LoadingBar className="loading-bar" />
       <Alert />
       <div className="App">
-        <Router>
+        <Router basename="/app">
           <Switch>
             <Route path="/" exact component={Welcome} />
             <Route path="/u/:username" component={User} />
