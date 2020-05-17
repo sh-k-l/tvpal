@@ -11,7 +11,11 @@ const Welcome = ({ authenticated }) => {
   return (
     <>
       <div className="fill-and-center welcome">
-        <h4>📺</h4>
+        <h4>
+          <span role="img" aria-label="TV">
+            📺
+          </span>
+        </h4>
         <h1>TV Pal</h1>
         <GoogleButton />
         {/* <Link

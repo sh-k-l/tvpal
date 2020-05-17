@@ -6,14 +6,16 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import NoShowsYet from '../NoShowsYet';
 
 import { handleReorderShows } from '../../actions/shows';
+import { setAlert } from '../../actions/alerts';
 
 import Column from './Column';
 
-const Rankings = ({ shows, username, reorderShows }) => {
+const Rankings = ({ shows, username, reorderShows, copyToClipboarAlert }) => {
   if (shows.length === 0) {
     return <NoShowsYet />;
   }
 
+  // Format data for react-beautiful-dnd
   const data = {
     shows: shows.reduce(
       (obj, item) => ((obj[item.id + ''] = { ...item, id: item.id + '' }), obj),
@@ -56,7 +58,9 @@ const Rankings = ({ shows, username, reorderShows }) => {
             </p>
           ) : (
             <CopyToClipboard text={shareUrl}>
-              <div className="button">Copy Share Link</div>
+              <div className="button" onClick={() => copyToClipboarAlert()}>
+                Copy Share Link
+              </div>
             </CopyToClipboard>
           )}
           <div className="how-to">
@@ -86,6 +90,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   reorderShows: (from, to) => dispatch(handleReorderShows(from, to)),
+  copyToClipboarAlert: () => dispatch(setAlert('Copied share link to clipboard! 😊', 'success')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Rankings);
