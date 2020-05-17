@@ -57,6 +57,9 @@ router.patch(
       min: 3,
       max: 15,
     }),
+    check('username')
+      .custom((value) => !/\s/.test(value))
+      .withMessage('No spaces are allowed in the username'),
     auth,
   ],
   async (req, res) => {
