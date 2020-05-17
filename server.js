@@ -25,7 +25,7 @@ app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/app/static', express.static(path.join(__dirname, 'client/build//static')));
-  app.get('/app', (req, res) => {
+  app.get('/app/*', (req, res) => {
     console.log('sending index file');
     // res.sendFile(path.resolve(__dirname, '/client/build/index.html'));
     res.sendFile('index.html', { root: path.join(__dirname, './client/build/') });
