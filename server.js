@@ -24,13 +24,17 @@ app.use('/api/users', users);
 app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
-  express.static('client/build');
-  app.use('/app', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '/client/build/index.html'));
-  });
-  // app.use('/app', express.static('client/build'));
+  // app.use(express.static(path.join(__dirname, 'client/build')));
+  // app.get('/app/*', (req, res) => {
+  //   console.log('sending index file');
+  //   // res.sendFile(path.resolve(__dirname, '/client/build/index.html'));
+  //   res.sendFile('index.html', { root: path.join(__dirname, './client/build/') });
+  // });
+  console.log('prod ==================================================================');
+} else {
+  console.log('not ==================================================================');
 }
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server started on port ${PORT} ${process.env.NODE_ENV}`));
