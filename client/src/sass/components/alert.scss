@@ -5,9 +5,12 @@
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
+  align-items: center;  
   z-index: 999;
+
+  @include for-size(tablet-portrait-up) {    
+    font-size: 1.5rem;
+  }
 }
 
 
@@ -24,24 +27,20 @@
   background-color: $grey-1;
   border-radius: 10px;
 
-  @include for-size(tablet-portrait-up) {    
-   
-  }
-
   p{
     margin: 0;
   }
 
-  i{
-    opacity: 0.5;
-    font-size: 0.7rem;
-    padding:5px;
-    cursor: pointer;
+  // i{
+  //   opacity: 0.5;
+  //   font-size: 0.7rem;
+  //   padding:5px;
+  //   cursor: pointer;
 
-    @include for-size(tablet-portrait-up) {    
-      font-size: 1rem;
-    }
-  }
+  //   @include for-size(tablet-portrait-up) {    
+  //     font-size: 1rem;
+  //   }
+  // }
 }
 
 .alert-success {

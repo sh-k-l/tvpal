@@ -26,7 +26,7 @@ if (window.localStorage.token) {
 const App = ({ getUser }) => {
   useEffect(() => {
     getUser();
-  }, []);
+  }, [getUser]);
 
   // navigator.clipboard.writeText('poo poo');
   return (
