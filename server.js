@@ -27,10 +27,9 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
   app.get('/app/*', (req, res) => {
     console.log('sending index file');
-    // res.sendFile(path.resolve(__dirname, '/client/build/index.html'));
-    res.sendFile('index.html', { root: path.join(__dirname, './client/build/') });
+    res.sendFile(path.resolve(__dirname, '/client/build/index.html'));
+    // res.sendFile('index.html', { root: path.join(__dirname, './client/build/') });
   });
-  console.log('prod ==================================================================');
 }
 const PORT = process.env.PORT || 5000;
 
