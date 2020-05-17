@@ -59,7 +59,10 @@ router.patch(
     }),
     check('username')
       .custom((value) => !/\s/.test(value))
-      .withMessage('No spaces are allowed in the username'),
+      .withMessage('Username must not contain spaces'),
+    check('username')
+      .custom((value) => /^\w+$/.test(value))
+      .withMessage('Username must only contain A-Z and 0-9 characters only'),
     auth,
   ],
   async (req, res) => {
