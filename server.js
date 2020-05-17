@@ -24,7 +24,7 @@ app.use('/api/users', users);
 app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  // app.use(express.static(path.join(__dirname, 'client/build')));
   // app.get('/app/*', (req, res) => {
   //   console.log('sending index file');
   //   // res.sendFile(path.resolve(__dirname, '/client/build/index.html'));
