@@ -1,11 +1,11 @@
 // Fix jumping scrollbar
 html { 
   margin-left: calc(100vw - 100%); 
-  padding-bottom: 2rem;
 }
 
 body{
   background-color: $grey-1;
+  padding-bottom: 2rem;
 }
 
 .fill-and-center {
