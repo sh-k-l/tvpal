@@ -24,8 +24,8 @@ app.use('/api/users', users);
 app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/app/static', express.static(path.join(__dirname, 'client/build//static')));
-  app.use('/app/icon', express.static(path.join(__dirname, 'client/build//icon')));
+  app.use('/app/static', express.static(path.join(__dirname, 'client/build/static')));
+  app.use('/app/icon', express.static(path.join(__dirname, 'client/build/icon')));
   app.get(['/app', '/app/*'], (req, res) => {
     res.sendFile('index.html', { root: path.join(__dirname, './client/build/') });
   });
