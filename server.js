@@ -29,6 +29,9 @@ if (process.env.NODE_ENV === 'production') {
   app.get(['/app', '/app/*'], (req, res) => {
     res.sendFile('index.html', { root: path.join(__dirname, './client/build/') });
   });
+  app.get('/', (req, res) => {
+    res.redirect('/app');
+  });
 }
 const PORT = process.env.PORT || 5000;
 
