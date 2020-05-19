@@ -5,7 +5,7 @@ import ShowListItem from './ShowListItem';
 
 import { handleAddShow } from '../../actions/shows';
 
-const ShowList = ({ shows, rankings, addShow }) => {
+const ShowList = ({ shows, rankings, addShow, clearInput }) => {
   if (shows === null) return null;
 
   return (
@@ -23,6 +23,7 @@ const ShowList = ({ shows, rankings, addShow }) => {
               alreadyAdded={index !== -1}
               addShowHandler={addShow}
               key={show.id}
+              clearInput={clearInput}
             />
           );
         })}

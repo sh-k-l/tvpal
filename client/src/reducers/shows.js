@@ -15,35 +15,27 @@ export default (state = null, action) => {
       return [...state, action.show];
     case REMOVE_SHOW: {
       const showIndex = state.findIndex((show) => show.id === action.show);
-      console.log('REMOVE SHOW', state);
       const newShows = JSON.parse(JSON.stringify(state));
       if (showIndex !== -1) newShows.splice(showIndex, 1);
-      console.log(newShows);
       return newShows;
     }
     case REORDER_SHOWS: {
-      console.log('REORDER SHOWS', state);
       const newShows = JSON.parse(JSON.stringify(state));
       newShows.splice(action.to, 0, newShows.splice(action.from, 1)[0]);
-      console.log(newShows);
       return newShows;
     }
     case EPISODES_SEEN: {
       const showIndex = state.findIndex((show) => show.id === action.show);
-      console.log('EPISODES SEEN', state);
       const newShows = JSON.parse(JSON.stringify(state));
       newShows[showIndex].seenEpisodes.push(...action.episodes);
-      console.log(newShows);
       return newShows;
     }
     case EPISODES_UNSEEN: {
       const showIndex = state.findIndex((show) => show.id === action.show);
-      console.log('EPISODES UNSEEN', state);
       const newShows = JSON.parse(JSON.stringify(state));
       newShows[showIndex].seenEpisodes = newShows[showIndex].seenEpisodes.filter(
         (ep) => !action.episodes.includes(ep)
       );
-      console.log(newShows);
       return newShows;
     }
     default:

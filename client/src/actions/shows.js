@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
+import { setAlert } from './alerts';
 import { handleRequestEpisodes } from './episodes';
 
 export const ADD_SHOW = 'ADD_SHOW';
@@ -25,8 +26,12 @@ export const handleAddShow = (show) => async (dispatch) => {
     });
     dispatch(addShow({ ...show, seenEpisodes: [] }));
     dispatch(handleRequestEpisodes(show.id));
+    dispatch(setAlert(`${show.name} added! 😀`, 'success'));
+    return true;
   } catch (error) {
     console.log(error);
+    dispatch(setAlert(`💩 That didn't work for some reason. Please try again.`, 'error'));
+    return false;
   } finally {
     dispatch(hideLoading());
   }

@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ShowListItem = ({ show, alreadyAdded, addShowHandler }) => {
-  const handleAdd = () => {
+const ShowListItem = ({ show, alreadyAdded, addShowHandler, clearInput }) => {
+  const handleAdd = async () => {
     if (alreadyAdded) return;
 
-    addShowHandler({
+    const res = await addShowHandler({
       id: show.id,
       name: show.name,
       imdb: show.externals.imdb,
@@ -12,6 +12,9 @@ const ShowListItem = ({ show, alreadyAdded, addShowHandler }) => {
       country: show.network ? show.network.country.code : null,
       status: show.status,
     });
+    if (res === true) {
+      clearInput();
+    }
   };
 
   return (

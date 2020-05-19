@@ -14,7 +14,7 @@ const Season = ({ showId, season, episodes, seenEpisodes, toggleEpisodes }) => {
               className={isSeen ? 'node seen' : 'node'}
               onClick={() => toggleEpisodes(showId, [ep.id], isSeen ? 'unseen' : 'seen')}
               key={ep.id}
-              onMouseEnter={() => setEpTitle(`${ep.number}: ${ep.name}`)}
+              onMouseEnter={() => setEpTitle(`${ep.number}) ${ep.name}`)}
               onMouseLeave={() => setEpTitle(null)}
             ></div>
           );

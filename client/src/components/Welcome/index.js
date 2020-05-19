@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import GoogleButton from './GoogleButton';
 
 const Welcome = ({ authenticated }) => {
-  if (authenticated) return <Redirect to="/backlog" />;
+  if (authenticated) return <Redirect to="/calendar" />;
 
   return (
     <>

@@ -10,7 +10,7 @@ const BacklogItem = ({ episode, setSeen }) => {
         <div>{handleEpisodeNumber(season, number)}</div>
         <div>{handleDate(airstamp)}</div>
       </div>
-      <div className="name">{name.length < 14 ? name : name.slice(0, 14) + '...'}</div>
+      <div className="name">{name.length < 13 ? name : name.slice(0, 13) + '...'}</div>
     </div>
   );
 };

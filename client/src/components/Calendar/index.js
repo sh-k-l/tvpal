@@ -55,12 +55,14 @@ const Calendar = ({ days }) => {
                 <span>{date.format('DD/MM')}</span>
               </div>
               <div className="tail">
-                {days[week * 7 + index].map((ep) => (
-                  <div className="episode" key={ep.id}>
-                    <p className="number">{ep.number}</p>
-                    <p className="name">{ep.show}</p>
-                  </div>
-                ))}
+                {days &&
+                  Object.keys(days).length !== 0 &&
+                  days[week * 7 + index].map((ep) => (
+                    <div className="episode" key={ep.id}>
+                      <p className="number">{ep.number}</p>
+                      <p className="name">{ep.show}</p>
+                    </div>
+                  ))}
               </div>
             </div>
           );
@@ -76,6 +78,8 @@ const mapStateToProps = (state) => {
 
   const episodesToAir = [];
 
+  if (!shows) return {};
+
   shows.forEach((show) => {
     // Skips shows without episode data
     if (typeof episodes[show.id] === 'undefined' || episodes[show.id] === null) {
@@ -88,8 +92,9 @@ const mapStateToProps = (state) => {
         return moment(ep.airstamp) >= startDate;
       })
       .map((ep) => {
-        ep.show = show;
-        return ep;
+        const episode = { ...ep };
+        episode.show = show;
+        return episode;
       });
 
     episodesToAir.push(...toAir);

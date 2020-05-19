@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Link } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import NoShowsYet from '../NoShowsYet';
+import NothingToShow from '../NothingToShow';
 
 import { handleReorderShows } from '../../actions/shows';
 import { setAlert } from '../../actions/alerts';
@@ -12,7 +12,7 @@ import Column from './Column';
 
 const Rankings = ({ shows, username, reorderShows, copyToClipboarAlert }) => {
   if (shows.length === 0) {
-    return <NoShowsYet />;
+    return <NothingToShow />;
   }
 
   // Format data for react-beautiful-dnd

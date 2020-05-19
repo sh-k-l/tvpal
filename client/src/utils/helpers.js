@@ -27,3 +27,6 @@ export const create2DArray = (numRows) => {
 
   return array;
 };
+
+export const filterOutNotAiredYet = (episodes) =>
+  episodes.filter((ep) => Date.now() >= new Date(ep.airstamp) && ep.airstamp !== null);

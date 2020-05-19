@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import BacklogRow from './BacklogRow';
-import NoShowsYet from '../NoShowsYet';
+import NothingToShow from '../NothingToShow';
 import { handleToggleEpisodes } from '../../actions/shows';
 
 const Backlog = ({ shows, toggleEpisode }) => {
@@ -9,7 +9,7 @@ const Backlog = ({ shows, toggleEpisode }) => {
     return null;
   }
   if (shows.length === 0) {
-    return <NoShowsYet />;
+    return <NothingToShow />;
   }
   return (
     <div className="backlog">

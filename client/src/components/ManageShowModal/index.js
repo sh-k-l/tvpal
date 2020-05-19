@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Modal from '../Modal';
 import Season from './Season';
 import { handleRemoveShow, handleToggleEpisodes } from '../../actions/shows';
+import { filterOutNotAiredYet } from '../../utils/helpers';
 
 const ManageShowModal = ({ toggleVisibleModal, isOpen, show, removeShow, toggleEpisodes }) => {
   if (show === null) return null;
@@ -41,7 +42,7 @@ const mapStateToProps = (state) => {
   const show = shows.find((show) => show.id === modals.show);
   if (!show) return { show: null };
 
-  const myEpisodes = episodes[show.id].filter((ep) => Date.now() >= new Date(ep.airstamp));
+  const myEpisodes = filterOutNotAiredYet(episodes[show.id]);
 
   if (myEpisodes.length !== 0) {
     show.episodes = {};

@@ -8,6 +8,8 @@ const ShowAddingModal = ({ toggleVisibleModal, isOpen }) => {
   const [search, setSearch] = useState('');
   const [shows, setShows] = useState(null);
 
+  const clearInput = () => setSearch('');
+
   useEffect(() => {
     if (search.length === 0) {
       setShows(null);
@@ -32,6 +34,7 @@ const ShowAddingModal = ({ toggleVisibleModal, isOpen }) => {
     loadData();
 
     return () => {
+      // Cancel request if unmounted
       source.cancel();
     };
   }, [search]);
@@ -46,7 +49,7 @@ const ShowAddingModal = ({ toggleVisibleModal, isOpen }) => {
           onChange={(e) => setSearch(e.target.value)}
           placeholder={`e.g. "Breaking Bad"`}
         />
-        <ShowList shows={shows} />
+        <ShowList shows={shows} clearInput={clearInput} />
       </div>
     </Modal>
   );
