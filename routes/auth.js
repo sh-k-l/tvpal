@@ -18,7 +18,7 @@ router.get('/google/callback', passport.authenticate('google'), (req, res) => {
   if (process.env.NODE_ENV === 'development') {
     res.redirect(`http://localhost:3000/app/auth?token=${token}`);
   } else {
-    res.redirect(`http://tv-pal-2020.herokuapp.com/app/auth?token=${token}`);
+    res.redirect(`https://tv-pal-2020.herokuapp.com/app/auth?token=${token}`);
   }
 });
 
