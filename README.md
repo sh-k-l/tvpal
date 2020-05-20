@@ -3,6 +3,7 @@
 A full stack MERN application to track TV shows and organise them into a ranking list, which you can then share.
 
 API and Front end hosted on Heroku: https://tv-pal-2020.herokuapp.com/app
+
 DB hosted on MongoDB Atlas
 
 Some things I learned while making this:
