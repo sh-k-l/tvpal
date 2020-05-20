@@ -20,7 +20,7 @@ const ShowAddingModal = ({ toggleVisibleModal, isOpen }) => {
     const loadData = async () => {
       try {
         const response = await externalRequest.get(
-          `http://api.tvmaze.com/search/shows?q=${search}`,
+          `https://api.tvmaze.com/search/shows?q=${search}`,
           {
             cancelToken: source.token,
           }

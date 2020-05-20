@@ -16,7 +16,7 @@ const receiveEpisodes = (showId, episodes) => ({
 export const handleRequestEpisodes = (showId) => async (dispatch) => {
   try {
     dispatch(requestEpisodes(showId));
-    const { data } = await externalRequest.get(`http://api.tvmaze.com/shows/${showId}/episodes`);
+    const { data } = await externalRequest.get(`https://api.tvmaze.com/shows/${showId}/episodes`);
 
     dispatch(receiveEpisodes(showId, data));
   } catch (error) {
