@@ -7,7 +7,7 @@
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently --kill-others-on-fail \"npm run start\" \"npm run client\""
   },
@@ -21,14 +21,14 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.9",
     "passport": "^0.4.1",
-    "passport-google-oauth20": "^2.0.0",
-    "uuid": "^7.0.3"
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "concurrently": "^5.1.0",
     "mocha": "^7.1.1",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.4"
   }
 }

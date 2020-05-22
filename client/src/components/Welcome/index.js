@@ -3,7 +3,7 @@ import { Link } from 'react-scroll';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import GoogleButton from './GoogleButton';
+import SocialSignIns from './SocialSignIns';
 
 const Welcome = ({ authenticated }) => {
   if (authenticated) return <Redirect to="/calendar" />;
@@ -17,7 +17,7 @@ const Welcome = ({ authenticated }) => {
           </span>
         </h4>
         <h1>TV Pal</h1>
-        <GoogleButton />
+        <SocialSignIns />
         {/* <Link
           activeClass="active"
           className="info"
