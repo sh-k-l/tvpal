@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import SummaryItem from './SummaryItem.js';
 import NothingToShow from '../NothingToShow';
@@ -6,15 +6,28 @@ import { handleToggleModal } from '../../actions/modals';
 import { filterOutNotAiredYet } from '../../utils/helpers';
 
 const Summary = ({ shows, toggleManageShow }) => {
+  const [filterText, setFilterText] = useState('');
+
   if (shows.length === 0) {
     return <NothingToShow />;
   }
 
   return (
     <div className="summary">
-      {shows.map((show) => (
-        <SummaryItem show={show} key={show.id} toggleManageShow={toggleManageShow} />
-      ))}
+      <div className="filters">
+        <input
+          type="search"
+          value={filterText}
+          onChange={(e) => setFilterText(e.target.value)}
+          placeholder="Filter by show name..."
+        />
+      </div>
+
+      {shows
+        .filter((show) => show.name.toLowerCase().includes(filterText.toLowerCase()))
+        .map((show) => (
+          <SummaryItem show={show} key={show.id} toggleManageShow={toggleManageShow} />
+        ))}
     </div>
   );
 };
