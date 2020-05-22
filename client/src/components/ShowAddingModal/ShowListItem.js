@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ShowListItem = ({ show, alreadyAdded, addShowHandler, clearInput }) => {
+const ShowListItem = ({ show, alreadyAdded, addShowHandler, resetInput }) => {
   const handleAdd = async () => {
     if (alreadyAdded) return;
 
@@ -13,7 +13,7 @@ const ShowListItem = ({ show, alreadyAdded, addShowHandler, clearInput }) => {
       status: show.status,
     });
     if (res === true) {
-      clearInput();
+      resetInput();
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import externalRequest from '../../utils/externalRequest';
 import Modal from '../Modal';
@@ -7,8 +7,12 @@ import ShowList from './ShowList';
 const ShowAddingModal = ({ toggleVisibleModal, isOpen }) => {
   const [search, setSearch] = useState('');
   const [shows, setShows] = useState(null);
+  const searchField = useRef(null);
 
-  const clearInput = () => setSearch('');
+  const resetInput = () => {
+    setSearch('');
+    searchField.current.focus();
+  };
 
   useEffect(() => {
     if (search.length === 0) {
@@ -48,8 +52,10 @@ const ShowAddingModal = ({ toggleVisibleModal, isOpen }) => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder={`e.g. "Breaking Bad"`}
+          ref={searchField}
+          autoFocus
         />
-        <ShowList shows={shows} clearInput={clearInput} />
+        <ShowList shows={shows} resetInput={resetInput} />
       </div>
     </Modal>
   );
