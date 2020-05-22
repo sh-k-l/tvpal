@@ -20,6 +20,7 @@
     "express-validator": "^6.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.9",
+    "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0"
@@ -28,7 +29,6 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "concurrently": "^5.1.0",
-    "mocha": "^7.1.1",
-    "nodemon": "^2.0.4"
+    "mocha": "^7.1.1"
   }
 }
