@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SummaryItem from './SummaryItem.js';
 import NothingToShow from '../NothingToShow';
 import { handleToggleModal } from '../../actions/modals';
 import { filterOutNotAiredYet } from '../../utils/helpers';
 
-const Summary = ({ shows, toggleManageShow }) => {
+const Summary = ({ shows, toggleManageShow, toggleRankings }) => {
   const [filterText, setFilterText] = useState('');
 
   if (shows.length === 0) {
@@ -14,7 +15,12 @@ const Summary = ({ shows, toggleManageShow }) => {
 
   return (
     <div className="summary">
-      <div className="filters">
+      <div className="header">
+        <div className="button">
+          <Link to="/rankings">
+            <i className="fas fa-sort"></i> Rankings
+          </Link>
+        </div>
         <input
           type="search"
           value={filterText}
@@ -57,6 +63,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   toggleManageShow: (showId) => dispatch(handleToggleModal('manage-show', showId)),
+  toggleRankings: () => dispatch(handleToggleModal('rankings')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Summary);

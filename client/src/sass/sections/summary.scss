@@ -6,11 +6,17 @@
   margin: 0 auto;
   margin-bottom: 2rem;
 
-  .filters {
+  @include for-size(tablet-portrait-up) {    
+    justify-content: space-between;
+  }
+
+  .header {
     width: 80vw;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 
     input {
       min-width: 260px;
@@ -24,7 +30,7 @@
   flex-direction: column;
   padding: 0;
   overflow: hidden;
-  margin:0.5rem;
+  margin:0.5rem 0;
   max-width: 210px;
   text-align: center;
 }

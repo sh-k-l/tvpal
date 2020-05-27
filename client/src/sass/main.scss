@@ -1,11 +1,11 @@
 //BASE 
 @import './base/reset.scss';
 @import './base/variables.scss';
+@import './base/responsiveness.scss';
 @import './base/typography.scss';
 @import './base/mixins.scss';
 @import './base/structure.scss';
 @import './base/inputs.scss';
-@import './base/responsiveness.scss';
 
 //COMPONENTS
 @import './components/modal.scss';

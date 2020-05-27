@@ -7,7 +7,7 @@ const Menu = ({ toggleShowAdder }) => {
       <ul>
         <li>
           <NavLink to="/summary" activeClassName="selected">
-            Summary
+            My Shows
           </NavLink>
         </li>
         <li>
@@ -20,11 +20,11 @@ const Menu = ({ toggleShowAdder }) => {
             Calendar
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/rankings" activeClassName="selected">
             Rankings
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink to="/settings" activeClassName="selected">
             {/* Settings */}

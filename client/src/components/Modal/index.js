@@ -2,17 +2,17 @@ import React from 'react';
 import RMSModal from 'react-modal-slider';
 import 'react-modal-slider/lib/main.css';
 
-const Modal = ({ toggleVisibleModal, isOpen, direction, children }) => {
+const Modal = ({ toggleVisibleModal, isOpen, direction, width, children }) => {
   return (
     <RMSModal
       // default false
       isOpen={isOpen}
       // default 60%
-      width={'80%'}
+      width={width ? width : '80%'}
       // default from right
       directionFrom={direction}
       // default Modal
-      contentLabel={'Demo Modal'}
+      contentLabel={'Modal'}
       onRequestClose={toggleVisibleModal}
       // optional for accessibility
       setAppElement={'#root'}
