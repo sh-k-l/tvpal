@@ -16,11 +16,11 @@ const Summary = ({ shows, toggleManageShow, toggleRankings }) => {
   return (
     <div className="summary">
       <div className="header">
-        <div className="button">
-          <Link to="/rankings">
+        <Link to="/rankings">
+          <div className="button">
             <i className="fas fa-sort"></i> Rankings
-          </Link>
-        </div>
+          </div>
+        </Link>
         <input
           type="search"
           value={filterText}
