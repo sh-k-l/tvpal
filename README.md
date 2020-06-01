@@ -1,8 +1,8 @@
 # TV Pal
 
-A full stack MERN application to track TV shows and organise them into a ranking list, which you can then share ([here](http://tv-pal-2020.herokuapp.com/app/u/smc) is my list, please don't judge me).
+A full stack MERN application to track TV shows and organise them into a ranking list, which you can then share ([here](https://www.tv-pal-2020.herokuapp.com/app/u/smc) is my list, please don't judge me).
 
-API and Front end hosted on Heroku [here](https://tv-pal-2020.herokuapp.com)
+API and Front end hosted on Heroku [here](https://www.tv-pal-2020.herokuapp.com)
 
 DB hosted on MongoDB Atlas
 
