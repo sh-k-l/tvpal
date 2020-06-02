@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Menu from '../Menu';
+import Menu from '../Menu/Menu';
 import { handleToggleModal } from '../../actions/modals';
 
 const PrivateRoute = ({ component: Component, authenticated, toggleShowAdder, ...rest }) => (

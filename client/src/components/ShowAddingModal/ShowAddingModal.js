@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import externalRequest from '../../utils/externalRequest';
-import Modal from '../Modal';
+import Modal from '../Modal/Modal';
 import ShowList from './ShowList';
 
 const ShowAddingModal = ({ toggleVisibleModal, isOpen }) => {

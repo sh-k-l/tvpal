@@ -6,7 +6,7 @@ const BacklogRow = ({ show, toggleEpisode }) => {
   if (Array.isArray(show.episodes)) {
     tail = show.episodes
       .filter((episode, index) => index < 10)
-      .map((episode, index) => (
+      .map((episode) => (
         <BacklogItem
           episode={episode}
           setSeen={() => toggleEpisode(show.id, episode.id, 'seen')}
@@ -14,12 +14,15 @@ const BacklogRow = ({ show, toggleEpisode }) => {
         />
       ));
   } else {
-    tail = <p>Loading...</p>;
+    tail = 'Loading...';
   }
 
   return (
     <div className="backlog-row content-box">
-      <div className="backlog-head">{show.name}</div>
+      <div className="backlog-head">
+        <div className="name">{show.name}</div>
+        <div className="count">({show.episodes.length})</div>
+      </div>
       <div className="backlog-tail">{tail}</div>
     </div>
   );

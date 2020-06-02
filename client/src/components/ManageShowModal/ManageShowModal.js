@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Modal from '../Modal';
+import Modal from '../Modal/Modal';
 import Season from './Season';
 import { handleRemoveShow, handleToggleEpisodes } from '../../actions/shows';
 import { filterOutNotAiredYet } from '../../utils/helpers';

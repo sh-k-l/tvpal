@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SummaryItem from './SummaryItem.js';
-import NothingToShow from '../NothingToShow';
+import NothingToShow from '../NothingToShow/NothingToShow';
 import { handleToggleModal } from '../../actions/modals';
 import { filterOutNotAiredYet } from '../../utils/helpers';
 
-const Summary = ({ shows, toggleManageShow, toggleRankings }) => {
+const Summary = ({ shows, toggleManageShow }) => {
   const [filterText, setFilterText] = useState('');
 
   if (shows.length === 0) {
@@ -14,7 +14,7 @@ const Summary = ({ shows, toggleManageShow, toggleRankings }) => {
   }
 
   return (
-    <div className="summary">
+    <div className="content summary">
       <div className="header">
         <Link to="/rankings">
           <div className="button">
@@ -29,11 +29,13 @@ const Summary = ({ shows, toggleManageShow, toggleRankings }) => {
         />
       </div>
 
-      {shows
-        .filter((show) => show.name.toLowerCase().includes(filterText.toLowerCase()))
-        .map((show) => (
-          <SummaryItem show={show} key={show.id} toggleManageShow={toggleManageShow} />
-        ))}
+      <div className="summary-item-wrapper">
+        {shows
+          .filter((show) => show.name.toLowerCase().includes(filterText.toLowerCase()))
+          .map((show) => (
+            <SummaryItem show={show} key={show.id} toggleManageShow={toggleManageShow} />
+          ))}
+      </div>
     </div>
   );
 };

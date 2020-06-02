@@ -15,7 +15,7 @@ const User = ({ match }) => {
   if (!details) return null;
 
   return (
-    <div className="user-ranking">
+    <div className="content user-ranking">
       <h4>{`${details.name}'s Rankings`}</h4>
       <Link to="/" className="to-home">
         <i className="fas fa-chevron-circle-left"></i> Make your own rankings and manage your TV

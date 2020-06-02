@@ -7,6 +7,7 @@ body{
   background-color: $grey-1;
 }
 
+
 .fill-and-center {
   height:100vh;
   display:flex;
@@ -26,4 +27,33 @@ body{
   pointer-events: none;
   height: 100%;
   width: 100%;
+}
+
+.center{
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.content{
+  max-width: 80vw;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+
+  .header{
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      display: inline-block;
+    }
+  }
+}
+
+.content-box{
+  @include box-shadow;
+  background-color: white;
+  padding: 1rem;
+  margin-top: 1rem ;
+  border-radius: 0.5rem;
 }

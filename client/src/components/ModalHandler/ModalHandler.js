@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ShowAddingModal from '../ShowAddingModal';
-import ManageShowModal from '../ManageShowModal';
+import ShowAddingModal from '../ShowAddingModal/ShowAddingModal';
+import ManageShowModal from '../ManageShowModal/ManageShowModal';
 import { handleToggleModal } from '../../actions/modals';
 
 const ModalHandler = ({ modals, toggleModal }) => {

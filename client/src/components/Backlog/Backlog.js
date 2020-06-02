@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import BacklogRow from './BacklogRow';
-import NothingToShow from '../NothingToShow';
+import NothingToShow from '../NothingToShow/NothingToShow';
 import { handleToggleEpisodes } from '../../actions/shows';
 
 const Backlog = ({ shows, toggleEpisode }) => {
@@ -12,7 +12,7 @@ const Backlog = ({ shows, toggleEpisode }) => {
     return <NothingToShow />;
   }
   return (
-    <div className="backlog">
+    <div className="content backlog">
       {shows.map((show) => (
         <BacklogRow show={show} toggleEpisode={toggleEpisode} key={show.id} />
       ))}

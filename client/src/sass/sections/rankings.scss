@@ -1,6 +1,4 @@
 .user-ranking{
-  max-width: 80vw;
-  margin: 0 auto;
   margin-top: 5rem;
 
   h4{
@@ -17,31 +15,13 @@
   }
 }
 
-
-
-.center{
-  text-align: center;
-  max-width: 80vw;
-  margin: 0 auto;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-
-}
-
 .rankings{
   margin-bottom: 2rem;
   
-  .header{
-    text-align: center;
-    flex-wrap: wrap;
-  }
 
   .how-to{
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    max-width: 80vw;
-    margin: 0 auto;
     color: $grey-3;
   }
 
@@ -55,7 +35,6 @@
     counter-reset: gradient-counter;
     list-style: none;
     padding-left: 1rem;
-    max-width:80vw;
     width: 100%;
 
     

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Link } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import NothingToShow from '../NothingToShow';
+import NothingToShow from '../NothingToShow/NothingToShow';
 
 import { handleReorderShows } from '../../actions/shows';
 import { setAlert } from '../../actions/alerts';
@@ -49,9 +49,15 @@ const Rankings = ({ shows, username, reorderShows, copyToClipboarAlert }) => {
   shareUrl = shareUrl.join('/');
 
   return (
-    <>
-      <div className="rankings">
-        <div className="header">
+    <div className="content rankings">
+      <div className="header">
+        <div className="left">
+          <Link to="/summary">
+            <div className="button">
+              <i className="fas fa-caret-left"></i> Back
+            </div>
+          </Link>
+
           {!username ? (
             <p className="center">
               Add a username <Link to="/settings">here</Link> to share this list!
@@ -63,20 +69,20 @@ const Rankings = ({ shows, username, reorderShows, copyToClipboarAlert }) => {
               </div>
             </CopyToClipboard>
           )}
-          <div className="how-to">
-            Drag <div className="handle" /> to reorder
-          </div>
         </div>
-        <DragDropContext onDragEnd={onDragEnd}>
-          {data.columnOrder.map((columnId) => {
-            const column = data.columns[columnId];
-            const showsInColumn = column.showIds.map((showId) => data.shows[showId]);
-
-            return <Column key={columnId} column={column} shows={showsInColumn} />;
-          })}
-        </DragDropContext>
+        <div className="how-to">
+          Drag <div className="handle" /> to reorder
+        </div>
       </div>
-    </>
+      <DragDropContext onDragEnd={onDragEnd}>
+        {data.columnOrder.map((columnId) => {
+          const column = data.columns[columnId];
+          const showsInColumn = column.showIds.map((showId) => data.shows[showId]);
+
+          return <Column key={columnId} column={column} shows={showsInColumn} />;
+        })}
+      </DragDropContext>
+    </div>
   );
 };
 

@@ -24,7 +24,7 @@ const Calendar = ({ days }) => {
   };
 
   return (
-    <div className="calendar content-box">
+    <div className="content calendar content-box">
       <div className="week-picker">
         {' '}
         <div className="selector" onClick={lastWeek}>

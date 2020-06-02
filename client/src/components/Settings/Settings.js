@@ -10,7 +10,7 @@ const Settings = ({ user, logout, addUsername }) => {
   };
 
   return (
-    <div className="content-box settings">
+    <div className="content content-box settings">
       <h5>Account Settings</h5>
       <div className="group">
         <p>Logged in as:</p>{' '}

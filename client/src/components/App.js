@@ -8,16 +8,16 @@ import { handleGetUser } from '../actions/user';
 
 import TokenHandler from './misc/TokenHandler';
 import PrivateRoute from './misc/PrivateRoute';
-import Rankings from './Rankings';
-import Summary from './Summary';
-import Calendar from './Calendar';
-import Backlog from './Backlog';
-import Settings from './Settings';
-import Alert from './Alert';
-import Welcome from './Welcome';
-import ScrollUpButton from './ScrollUpButton';
-import ModalHandler from './ModalHandler';
-import User from './User';
+import Rankings from './Rankings/Rankings';
+import Summary from './Summary/Summary';
+import Calendar from './Calendar/Calendar';
+import Backlog from './Backlog/Backlog';
+import Settings from './Settings/Settings';
+import Alert from './Alert/Alert';
+import Welcome from './Welcome/Welcome';
+import ScrollUpButton from './ScrollUpButton/ScrollUpButton';
+import ModalHandler from './ModalHandler/ModalHandler';
+import User from './User/User';
 
 if (window.localStorage.token) {
   setAuthToken(window.localStorage.token);
