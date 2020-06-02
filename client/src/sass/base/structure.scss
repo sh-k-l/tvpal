@@ -43,6 +43,12 @@ body{
   .header{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-end;
+
+    .left{
+      align-self: end;
+    }
 
     p {
       display: inline-block;
