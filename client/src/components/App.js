@@ -28,7 +28,6 @@ const App = ({ getUser }) => {
     getUser();
   }, [getUser]);
 
-  // navigator.clipboard.writeText('poo poo');
   return (
     <>
       <LoadingBar className="loading-bar" />
