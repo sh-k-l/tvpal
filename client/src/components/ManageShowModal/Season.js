@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MarkAllButtons from './MarkAllButtons';
 
 const Season = ({ showId, season, episodes, seenEpisodes, toggleEpisodes }) => {
   const [epTitle, setEpTitle] = useState(null);
@@ -20,32 +21,22 @@ const Season = ({ showId, season, episodes, seenEpisodes, toggleEpisodes }) => {
           );
         })}
       </div>
-      <div className="mark-wrapper">
-        <div
-          className="button"
-          onClick={() =>
-            toggleEpisodes(
-              showId,
-              episodes.filter((ep) => seenEpisodes.includes(ep.id)).map((ep) => ep.id),
-              'unseen'
-            )
-          }
-        >
-          Mark All <i className="fas fa-times"></i>
-        </div>
-        <div
-          className="button"
-          onClick={() =>
-            toggleEpisodes(
-              showId,
-              episodes.filter((ep) => !seenEpisodes.includes(ep.id)).map((ep) => ep.id),
-              'seen'
-            )
-          }
-        >
-          Mark All <i className="fas fa-check"></i>
-        </div>
-      </div>
+      <MarkAllButtons
+        allSeen={() =>
+          toggleEpisodes(
+            showId,
+            episodes.filter((ep) => seenEpisodes.includes(ep.id)).map((ep) => ep.id),
+            'unseen'
+          )
+        }
+        allUnseen={() =>
+          toggleEpisodes(
+            showId,
+            episodes.filter((ep) => !seenEpisodes.includes(ep.id)).map((ep) => ep.id),
+            'seen'
+          )
+        }
+      />
     </div>
   );
 };

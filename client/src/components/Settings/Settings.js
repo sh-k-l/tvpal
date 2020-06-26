@@ -5,10 +5,6 @@ import { handleLogout, handleAddUsername } from '../../actions/user';
 const Settings = ({ user, logout, addUsername }) => {
   const [username, setUsername] = useState('');
 
-  const onClick = () => {
-    addUsername(username);
-  };
-
   return (
     <div className="content content-box settings">
       <h5>Account Settings</h5>
@@ -32,7 +28,7 @@ const Settings = ({ user, logout, addUsername }) => {
               onChange={(e) => setUsername(e.target.value)}
               placeholder={`e.g. "smc45"`}
             />
-            <div className="button" onClick={onClick}>
+            <div className="button" onClick={() => addUsername(username)}>
               Add Username
             </div>
           </div>

@@ -37,6 +37,8 @@ const ManageShowModal = ({ toggleVisibleModal, isOpen, show, removeShow, toggleE
 
 const mapStateToProps = (state) => {
   const { modals, shows, episodes } = state;
+
+  // No need to load show if no show is selected
   if (modals.show === null) return { show: null };
 
   const show = shows.find((show) => show.id === modals.show);
@@ -45,6 +47,7 @@ const mapStateToProps = (state) => {
   const myEpisodes = filterOutNotAiredYet(episodes[show.id]);
 
   if (myEpisodes.length !== 0) {
+    // Sort episodes into seasons
     show.episodes = {};
     const firstSeason = myEpisodes[0].season;
     const lastSeason = myEpisodes[myEpisodes.length - 1].season;

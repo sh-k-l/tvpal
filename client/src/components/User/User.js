@@ -12,7 +12,7 @@ const User = ({ match }) => {
     });
   }, [username]);
 
-  if (!details) return null;
+  if (!details) return <div>Loading...</div>;
 
   return (
     <div className="content user-ranking">

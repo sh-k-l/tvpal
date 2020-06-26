@@ -2,20 +2,21 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
 import { create2DArray, handleEpisodeNumber } from '../../utils/helpers';
+import WeekPicker from './WeekPicker';
 
 const WEEKCOUNT = 4;
 const LIMIT = 7 * WEEKCOUNT;
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const Calendar = ({ days }) => {
+const Calendar = ({ episodesAsDays }) => {
   const startDate = moment().startOf('isoWeek');
   const [week, setWeek] = useState(0);
 
-  const nextWeek = () => {
+  const weekIncrement = () => {
     setWeek((week + 1) % WEEKCOUNT);
   };
 
-  const lastWeek = () => {
+  const weekDecrement = () => {
     if (week - 1 < 0) {
       setWeek(WEEKCOUNT - 1);
     } else {
@@ -25,39 +26,27 @@ const Calendar = ({ days }) => {
 
   return (
     <div className="content calendar content-box">
-      <div className="week-picker">
-        {' '}
-        <div className="selector" onClick={lastWeek}>
-          <i className="fas fa-chevron-left"></i>
-        </div>
-        <p>
-          Week of{' '}
-          <b>
-            {startDate
-              .clone()
-              .add(week * 7, 'day')
-              .format('MMMM Do')}
-          </b>
-        </p>
-        <div className="selector" onClick={nextWeek}>
-          <i className="fas fa-chevron-right"></i>
-        </div>
-      </div>
+      <WeekPicker
+        startDate={startDate}
+        week={week}
+        weekIncrement={weekIncrement}
+        weekDecrement={weekDecrement}
+      />
       <div className="days-wrapper">
         {DAYS.map((day, index) => {
           const date = startDate.clone().add(week * 7 + index, 'day');
           const isToday = moment(date).isSame(moment(), 'day');
 
           return (
-            <div key={index} className={`day ${isToday ? 'today' : null}`}>
+            <div key={index} className={`day ${isToday && 'today'}`}>
               <div className="head">
                 {day}
                 <span>{date.format('DD/MM')}</span>
               </div>
               <div className="tail">
-                {days &&
-                  Object.keys(days).length !== 0 &&
-                  days[week * 7 + index].map((ep) => (
+                {episodesAsDays &&
+                  Object.keys(episodesAsDays).length !== 0 &&
+                  episodesAsDays[week * 7 + index].map((ep) => (
                     <div className="episode" key={ep.id}>
                       <p className="number">{ep.number}</p>
                       <p className="name">{ep.show}</p>
@@ -101,13 +90,13 @@ const mapStateToProps = (state) => {
   });
 
   // Sort episodes into day 2D array
-  const days = create2DArray(LIMIT);
+  const episodesAsDays = create2DArray(LIMIT);
 
   episodesToAir.forEach((episode) => {
     const epDate = moment(episode.airstamp);
-    const diff = epDate.diff(startDate, 'days');
-    if (diff < LIMIT) {
-      days[diff].push({
+    const dayOffset = epDate.diff(startDate, 'days');
+    if (dayOffset < LIMIT) {
+      episodesAsDays[dayOffset].push({
         id: episode.id,
         name: episode.name,
         show: episode.show.name,
@@ -117,7 +106,7 @@ const mapStateToProps = (state) => {
     }
   });
 
-  return { days };
+  return { episodesAsDays };
 };
 
 export default connect(mapStateToProps)(Calendar);

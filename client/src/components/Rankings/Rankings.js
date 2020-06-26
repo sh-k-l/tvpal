@@ -1,16 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { Link } from 'react-router-dom';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import NothingToShow from '../NothingToShow/NothingToShow';
 
 import { handleReorderShows } from '../../actions/shows';
 import { setAlert } from '../../actions/alerts';
 
 import Column from './Column';
+import Header from './RankingsHeader';
 
-const Rankings = ({ shows, username, reorderShows, copyToClipboarAlert }) => {
+const Rankings = ({ shows, username, reorderShows, copyToClipboardAlert }) => {
   if (shows.length === 0) {
     return <NothingToShow />;
   }
@@ -43,37 +42,9 @@ const Rankings = ({ shows, username, reorderShows, copyToClipboarAlert }) => {
     reorderShows(source.index, destination.index);
   };
 
-  let shareUrl = window.location.href.split('/');
-  shareUrl.splice(shareUrl.length - 1, 1);
-  shareUrl.push('u/' + username);
-  shareUrl = shareUrl.join('/');
-
   return (
     <div className="content rankings">
-      <div className="header">
-        <div className="left">
-          <Link to="/summary">
-            <div className="button">
-              <i className="fas fa-caret-left"></i> Back
-            </div>
-          </Link>
-
-          {!username ? (
-            <p className="center">
-              Add a username <Link to="/settings">here</Link> to share this list!
-            </p>
-          ) : (
-            <CopyToClipboard text={shareUrl}>
-              <div className="button" onClick={() => copyToClipboarAlert()}>
-                Copy Share Link
-              </div>
-            </CopyToClipboard>
-          )}
-        </div>
-        <div className="how-to">
-          Drag <div className="handle" /> to reorder
-        </div>
-      </div>
+      <Header username={username} copyToClipboardAlert={copyToClipboardAlert} />
       <DragDropContext onDragEnd={onDragEnd}>
         {data.columnOrder.map((columnId) => {
           const column = data.columns[columnId];
@@ -96,7 +67,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   reorderShows: (from, to) => dispatch(handleReorderShows(from, to)),
-  copyToClipboarAlert: () => dispatch(setAlert('Copied share link to clipboard! 😊', 'success')),
+  copyToClipboardAlert: () => dispatch(setAlert('Copied share link to clipboard! 😊', 'success')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Rankings);
