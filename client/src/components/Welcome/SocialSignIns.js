@@ -6,6 +6,7 @@ const SocialSignIns = () => {
 
   const googleHref = `${hrefPrefix}/api/auth/google`;
   const githubHref = `${hrefPrefix}/api/auth/github`;
+  const guestHref = `${hrefPrefix}/api/auth/guest`;
 
   return (
     <div className="social-sign-ins">
@@ -15,6 +16,9 @@ const SocialSignIns = () => {
       <a href={githubHref}>
         <GithubLoginButton />
       </a>
+      <p className="info">
+        <a href={guestHref}>or log in with a guest account</a>
+      </p>
     </div>
   );
 };
