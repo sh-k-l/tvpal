@@ -7,7 +7,7 @@ const setupMiddleware = (app) => {
   app.use(json());
   app.use(urlencoded({ extended: true }));
   app.use(morgan('tiny'));
-  app.use(helmet());
+  // app.use(helmet());
   app.use(passport.initialize());
 };
 
