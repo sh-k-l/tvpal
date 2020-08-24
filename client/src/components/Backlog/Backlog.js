@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import BacklogRow from './BacklogRow';
 import NothingToShow from '../NothingToShow/NothingToShow';
 import { handleToggleEpisodes } from '../../actions/shows';
+import { handleToggleModal } from '../../actions/modals';
 
-const Backlog = ({ shows, toggleEpisode }) => {
+const Backlog = ({ shows, toggleEpisode, toggleManageShow }) => {
   if (shows === null) {
     return null;
   }
@@ -14,7 +15,12 @@ const Backlog = ({ shows, toggleEpisode }) => {
   return (
     <div className="content backlog">
       {shows.map((show) => (
-        <BacklogRow show={show} toggleEpisode={toggleEpisode} key={show.id} />
+        <BacklogRow
+          show={show}
+          toggleEpisode={toggleEpisode}
+          toggleManageShow={toggleManageShow}
+          key={show.id}
+        />
       ))}
     </div>
   );
@@ -59,6 +65,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   toggleEpisode: (showId, episodeId, as) => dispatch(handleToggleEpisodes(showId, [episodeId], as)),
+  toggleManageShow: (showId) => dispatch(handleToggleModal('manage-show', showId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Backlog);

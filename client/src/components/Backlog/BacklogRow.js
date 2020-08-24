@@ -1,7 +1,7 @@
 import React from 'react';
 import BacklogItem from './BacklogItem';
 
-const BacklogRow = ({ show, toggleEpisode }) => {
+const BacklogRow = ({ show, toggleEpisode, toggleManageShow }) => {
   let tail = 'Loading...';
   let loaded = Array.isArray(show.episodes);
 
@@ -19,7 +19,7 @@ const BacklogRow = ({ show, toggleEpisode }) => {
 
   return (
     <div className="backlog-row content-box">
-      <div className="backlog-head">
+      <div className="backlog-head" onClick={() => toggleManageShow(show.id)}>
         <div className="name">{show.name}</div>
         <div className="count">({loaded ? show.episodes.length : '-'})</div>
       </div>

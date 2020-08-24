@@ -8,7 +8,7 @@ const Modal = ({ toggleVisibleModal, isOpen, direction, width, children }) => {
       // default false
       isOpen={isOpen}
       // default 60%
-      width={width ? width : '80%'}
+      // width={width ? width : '100%'}
       // default from right
       directionFrom={direction}
       // default Modal
@@ -26,7 +26,6 @@ const Modal = ({ toggleVisibleModal, isOpen, direction, width, children }) => {
       overlayClassName={'string'}
     >
       <div className="close" onClick={toggleVisibleModal}>
-        {/* <img alt="close modal" src={process.env.PUBLIC_URL + '/img/close.svg'} /> */}
         <i className="far fa-times-circle"></i>
       </div>
       {children}

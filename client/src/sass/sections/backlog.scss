@@ -12,9 +12,11 @@
   box-shadow: 10px 10px 10px;
   color: $grey-1;
   font-weight: lighter;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.2s ease-in-out;
 
   .count {
     align-self: flex-end;
@@ -26,6 +28,11 @@
   @include for-size(tablet-portrait-up) {    
     min-width: 150px;
     max-width: 150px;
+
+    &:hover{
+      min-width: 180px;
+      max-width: 180px;
+    }
   }
 }
 

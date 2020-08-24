@@ -19,7 +19,7 @@ export const handleDate = (d) => {
 };
 
 export const create2DArray = (numRows) => {
-  let array = new Array(numRows);
+  const array = new Array(numRows);
 
   for (let i = 0; i < numRows; i++) {
     array[i] = [];
@@ -28,5 +28,7 @@ export const create2DArray = (numRows) => {
   return array;
 };
 
-export const filterOutNotAiredYet = (episodes) =>
-  episodes.filter((ep) => Date.now() >= new Date(ep.airstamp) && ep.airstamp !== null);
+export const filterOutNotAiredYet = (episodes) => {
+  const currentDate = Date.now();
+  return episodes.filter((ep) => ep.airstamp !== null && currentDate >= new Date(ep.airstamp));
+};

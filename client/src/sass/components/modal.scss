@@ -1,6 +1,7 @@
 .modal{ 
   padding:2rem;
   overflow-y: auto;
+  width: 100% !important;
   
   .close{
     margin: 0 auto;    
@@ -12,6 +13,10 @@
       width:30px;
       height: 30px;
     }
+  }
+
+  @include for-size(tablet-portrait-up) {    
+    width: 80% !important;
   }
 }
 
