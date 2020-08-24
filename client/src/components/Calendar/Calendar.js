@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
 import { create2DArray, handleEpisodeNumber } from '../../utils/helpers';
+import { handleToggleModal } from '../../actions/modals';
+import CalenderItem from './CalenderItem';
 import WeekPicker from './WeekPicker';
 
 const WEEKCOUNT = 4;
 const LIMIT = 7 * WEEKCOUNT;
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const Calendar = ({ episodesAsDays }) => {
+const Calendar = ({ episodesAsDays, toggleManageShow }) => {
   const startDate = moment().startOf('isoWeek');
   const [week, setWeek] = useState(0);
 
@@ -47,10 +49,7 @@ const Calendar = ({ episodesAsDays }) => {
                 {episodesAsDays &&
                   Object.keys(episodesAsDays).length !== 0 &&
                   episodesAsDays[week * 7 + index].map((ep) => (
-                    <div className="episode" key={ep.id}>
-                      <p className="number">{ep.number}</p>
-                      <p className="name">{ep.show}</p>
-                    </div>
+                    <CalenderItem key={ep.id} episode={ep} toggleManageShow={toggleManageShow} />
                   ))}
               </div>
             </div>
@@ -99,7 +98,8 @@ const mapStateToProps = (state) => {
       episodesAsDays[dayOffset].push({
         id: episode.id,
         name: episode.name,
-        show: episode.show.name,
+        showName: episode.show.name,
+        showId: episode.show.id,
         number: handleEpisodeNumber(episode.season, episode.number),
         image: episode.show.image,
       });
@@ -109,4 +109,8 @@ const mapStateToProps = (state) => {
   return { episodesAsDays };
 };
 
-export default connect(mapStateToProps)(Calendar);
+const mapDispatchToProps = (dispatch) => ({
+  toggleManageShow: (showId) => dispatch(handleToggleModal('manage-show', showId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

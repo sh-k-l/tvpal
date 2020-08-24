@@ -67,7 +67,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   toggleManageShow: (showId) => dispatch(handleToggleModal('manage-show', showId)),
-  toggleRankings: () => dispatch(handleToggleModal('rankings')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Summary);
