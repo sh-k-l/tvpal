@@ -2,6 +2,9 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GithubStrategy = require('passport-github2').Strategy;
 const User = require('../models/User');
+const {
+  AUTH: { GOOGLE, GITHUB },
+} = require('../constants');
 
 // Needed for Passport.js
 passport.serializeUser((user, done) => {
@@ -16,9 +19,9 @@ passport.deserializeUser((user, done) => {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.GOOGLE_CALLBACK_URL,
+      clientID: GOOGLE.CLIENT_ID,
+      clientSecret: GOOGLE.CLIENT_SECRET,
+      callbackURL: GOOGLE.CALLBACK_URL,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -48,9 +51,9 @@ passport.use(
 passport.use(
   new GithubStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: process.env.GITHUB_CALLBACK_URL,
+      clientID: GITHUB.CLIENT_ID,
+      clientSecret: GITHUB.CLIENT_SECRET,
+      callbackURL: GITHUB.CALLBACK_URL,
       scope: 'user:email',
     },
     async (accessToken, refreshToken, profile, done) => {

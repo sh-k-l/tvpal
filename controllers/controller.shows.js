@@ -1,12 +1,4 @@
-const { Router } = require('express');
-const auth = require('../middleware/auth');
-
-const router = new Router();
-
-// @route   POST /shows
-// @desc    Add shows to account
-// @access  Private
-router.post('/', auth, async (req, res) => {
+const addOne = async (req, res) => {
   const { shows } = req.body;
 
   try {
@@ -33,12 +25,9 @@ router.post('/', auth, async (req, res) => {
   } catch (error) {
     return res.status(400).json({ msg: 'Invalid shows. Shows require an id and name' });
   }
-});
+};
 
-// @route   PATCH /shows
-// @desc    Reorder list of shows. Expects an array of show ids for new order.
-// @access  Private
-router.patch('/', auth, async (req, res) => {
+const reorderShows = async (req, res) => {
   const { order } = req.body;
   if (order.length !== req.user.shows.length) {
     return res.status(422).json({
@@ -61,12 +50,9 @@ router.patch('/', auth, async (req, res) => {
   req.user.shows = reordered;
   await req.user.save();
   res.status(200).json({ msg: 'OK' });
-});
+};
 
-// @route   DELETE /shows/:id
-// @desc    Remove show from list
-// @access  Private
-router.delete('/:id', auth, async (req, res) => {
+const removeOne = async (req, res) => {
   const index = req.user.shows.findIndex((s) => s._id === parseInt(req.params.id));
   if (index === -1) {
     return res.status(404).json({ msg: 'Show not found' });
@@ -74,12 +60,9 @@ router.delete('/:id', auth, async (req, res) => {
   req.user.shows.splice(index, 1);
   await req.user.save();
   res.status(200).json({ msg: 'OK' });
-});
+};
 
-// @route   PATCH /shows/:id
-// @desc    Mark an episode as seen or unseen
-// @access  Private
-router.patch('/:id/episodes', auth, async (req, res) => {
+const toggleEpisodes = async (req, res) => {
   const { markAs, episodeIds } = req.body;
 
   if (!markAs || !episodeIds) {
@@ -112,6 +95,11 @@ router.patch('/:id/episodes', auth, async (req, res) => {
 
   await req.user.save();
   res.status(200).json({ msg: 'OK' });
-});
+};
 
-module.exports = router;
+module.exports = {
+  addOne,
+  reorderShows,
+  removeOne,
+  toggleEpisodes,
+};
