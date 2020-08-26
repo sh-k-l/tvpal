@@ -8,7 +8,7 @@ const ShowListItem = ({ show, alreadyAdded, addShowHandler, resetInput }) => {
       id: show.id,
       name: show.name,
       imdb: show.externals.imdb,
-      image: show.image ? show.image.medium : null,
+      image: show.image ? show.image.medium.replace(/^http:\/\//i, 'https://') : null,
       country: show.network ? show.network.country.code : null,
       status: show.status,
     });
